@@ -1,0 +1,20 @@
+<arb-title type="Page" id="processedTransactionsTitle" [showArrow]="true" [title]="'payments.processed.title'| translate"
+           (onButtonClick)="onTitleButtonClick($event)"></arb-title>
+<arb-tabs id="processedTabs" [tabs]="tabs" [value]="type" (onChange)="tabChanged($event)"></arb-tabs>
+<arb-datatable id="processed-transactions-table"
+               [showSearch]="true"
+               [showFilter]="true"
+               [headers]="headers"
+               [data]="data"
+               [columnId]="'batchPk'"
+               [paginationValue]=" {page: 1, size: 50}"
+               [total]="total"
+               [visibleRangeLength]="5"
+               [pageSizes]=" [ 10, 20, 50, 100]"
+               (onFilterClick)="openSearch()"
+               (externalPagination)="externalPagination($event)"
+               (buttonClicked)="onTableButtonClick($event)"
+               [exportFileName]="exportFileName"
+               [title]="'payments.processed.title'"
+>
+</arb-datatable>

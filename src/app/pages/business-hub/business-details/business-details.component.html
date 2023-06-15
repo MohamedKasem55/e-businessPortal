@@ -1,0 +1,29 @@
+<ng-container *ngIf="productDetailsList.length > 0">
+  <arb-title
+    id="businessDetailsHubTitle"
+    [showArrow]="true"
+    (onButtonClick)="onBackArrowClicked()"
+    [title]="this.productDetailsList[0].title"
+  ></arb-title>
+  <arb-generic-feature-listing-group
+    [id]="'productsDetails'"
+    [list]="productDetailsList"
+  ></arb-generic-feature-listing-group>
+  <arb-title
+    id="featuresTitle"
+    [title]="'businessHub.featuresTitle' | translate"
+    type="Section"
+  ></arb-title>
+  <ng-container *ngFor="let item of lineCards; let index = index">
+    <arb-line-card
+      [id]="'lineCard' + index"
+      [title]="item.text"
+      [icon]="item.icon"
+    ></arb-line-card>
+  </ng-container>
+  <arb-bottom-buttons
+    [id]="'featureDetails'"
+    (onClick)="onSubscribe()"
+    [endButtons]="featureDetailsEndButtons"
+  ></arb-bottom-buttons>
+</ng-container>

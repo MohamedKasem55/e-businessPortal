@@ -1,0 +1,71 @@
+<ngb-accordion #ngbAccordion>
+  <ngb-panel id="current_details_{{ data.dossierID }}">
+    <ng-template ngbPanelHeader>
+      <arb-title
+        *ngIf="accordionTitle"
+        (onButtonClick)="accordionToggle(data.dossierID)"
+        [id]="'titleAccordion'"
+        [type]="'Section'"
+        [title]="accordionTitle.title || ''"
+        [endButtons]="accordionTitle.endButtons"
+      >
+      </arb-title>
+      <arb-dividers></arb-dividers>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+          <div
+            class="d-flex justify-content-center align-items-center position-relative"
+          >
+            <app-chart
+              [bgClass]="'bg-transparent'"
+              [chartData]="chartData"
+              [chartOptions]="chartOption"
+              [showHeader]="true"
+              [height]="chart_height"
+              [width]="chart_width"
+            >
+            </app-chart>
+            <span class="position-absolute text-center">
+              <span class="font-subhead-semi-bold color-arb-primaryText">{{
+                "finance.fleet.requests.totalFinancedAmount" | translate
+              }}</span>
+              <arb-amount
+                [amount]="currentDetails?.masterContractDtls?.totalFinanceAmt || ''"
+                [currency]="data?.currency || ''"
+                [size]="'sm'"
+              ></arb-amount>
+
+              <arb-dividers></arb-dividers>
+
+              <span class="font-subhead-semi-bold color-arb-primaryText">
+                {{
+                  "finance.fleet.requests.outstandingAmount" | translate
+                }}</span
+              >
+              <arb-amount
+                [amount]="currentDetails?.masterContractDtls?.totalRemainingAmt || ''"
+                [currency]="data?.currency || ''"
+                [size]="'sm'"
+              ></arb-amount>
+            </span>
+          </div>
+
+          <arb-button
+            [id]="viewInstallmentBtn.id"
+            [text]="viewInstallmentBtn.title"
+            [type]="viewInstallmentBtn.type"
+            (onClick)="viewInstallment($event)"
+          ></arb-button>
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <div class="row">
+            <arb-summary [sections]="sectionList"></arb-summary>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

@@ -1,0 +1,15 @@
+<div class="d-flex popover-class-body">
+  <div class="flex-column w-100">
+    <p class="d-flex color-arb-primaryText font-body-semi-bold"> {{popTitle | translate}} </p>
+    <span class="d-flex color-arb-primaryText font-body-regular">{{popText | translate}} </span>
+    <div class="d-flex pt-4 w-100">
+      <div class="d-flex justify-content-start flex-grow-1 h-100 align-content-center my-auto">
+        <arb-button [id]="'skip'" [type]="'outLine'" (onClick)="skip.emit()"
+                    [text]="'Skip Tutorial'"></arb-button>
+      </div>
+      <div class="d-flex justify-content-end">
+        <arb-button [id]="'next'" [type]="'primary'" [text]="'Next'" (onClick)="next.emit()"></arb-button>
+      </div>
+    </div>
+  </div>
+</div>

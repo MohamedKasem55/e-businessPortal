@@ -1,0 +1,70 @@
+@import "../../../../assets/scss/colors";
+@import "node_modules/arb-design-library/src/assets/scss/main";
+
+.navbar {
+  padding: 1rem 3.056rem;
+  border-bottom: 0.1rem solid $arb-outlineColor;
+
+  .container-fluid {
+    arb-logo {
+      width: 7.331rem;
+    }
+
+    .navbar-collapse {
+      .navbar-nav {
+        .nav-item {
+          a {
+            font-size: $h5-font-size;
+            color: $arb-primaryColor;
+            font-weight: $font-weight-semibold;
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-toggler {
+    padding: 0;
+    border: none;
+    top: 0.25rem;
+    right: 1rem;
+
+    &:focus {
+      outline: 0;
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+::ng-deep .terms-conditions .modal-body {
+  @extend .arb-scrollbar !optional;
+  max-height: 30rem !important;
+  overflow: hidden !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  text-align: left !important;
+
+  [dir="rtl"] {
+    text-align: right !important;
+  }
+}
+
+.contactUsModal {
+  align-content: center;
+  text-align: left;
+  width: 15rem;
+
+  [dir="rtl"] {
+    text-align: right !important;
+  }
+}
+
+::ng-deep .modalHeader .modal-header {
+  border-bottom: none;
+}
+
+.xcolor-size {
+  color: red;
+  font-size: 1.5rem;
+}

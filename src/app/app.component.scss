@@ -1,0 +1,9 @@
+@import "./../assets/scss/colors";
+@import "node_modules/arb-design-library/src/assets/scss/main";
+
+.mainApp {
+  background-color: $arb-primaryBG;
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+}

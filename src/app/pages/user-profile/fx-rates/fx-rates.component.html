@@ -1,0 +1,9 @@
+<arb-title
+  [id]="'fxRatesTitle'"
+  [title]="'public.fxRatesTitle' | translate"
+></arb-title>
+<app-form
+  [forms]="fxRatesForms"
+  (onButtonClick)="onBtnClicked($event)"
+  (onResultChanged)="onResultChanged($event)"
+></app-form>

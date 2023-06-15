@@ -1,0 +1,80 @@
+<arb-title
+  id="accounts-title-id"
+  [title]="'accounts.acc' | translate"
+  [endButtons]="pageTitleButtons"
+  (onButtonClick)="doButtonClick($event)"
+></arb-title>
+<div class="row mb-4">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+    <app-accounts-presentation-wrapper [accountResponse]="dashboardResponse"></app-accounts-presentation-wrapper>
+
+    <arb-box-list
+      id="accounts-box-list"
+      [box]="boxDtls"
+      [columnCount]="3"
+      (onClick)="onBoxClick($event)"
+      action="onHover"
+    ></arb-box-list>
+  </div>
+  <div
+    class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 account-chart"
+    *ngIf="eligibleJuridicalState"
+  >
+    <app-chart
+      [chartData]="lineChartData"
+      [chartOptions]="lineChartOptions"
+      [showHeader]="true"
+      [showChart]="showChart"
+    >
+      <div class="row">
+        <div
+          class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7 text-start"
+        >
+          <p class="font-body-bold mb-0 color-arb-primaryText">
+            {{ "accounts.avail-blnc" | translate }}
+          </p>
+          <p class="mb-0 d-flex gap-2">
+            <span class="font-body-regular color-arb-primaryText"
+              >{{ "accounts.total-cf" | translate }}:
+            </span>
+            <arb-amount
+              [id]="'test'"
+              [size]="'sm'"
+              [amount]="totalCashFlow && totalCashFlow.toString() || ''"
+              [currency]="'608'"
+            ></arb-amount>
+          </p>
+        </div>
+        <div
+          class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5 my-auto text-end"
+        >
+          <p class="mb-0">
+            <span
+              class="arb-icon-chevronLeft arb-icons-ar fs-3 arb-pointer color-arb-primaryColor"
+              (click)="selectPeriodType()"
+            ></span>
+            <span class="font-body-bold color-arb-primaryText">{{
+              selectedPeriodType.text | translate
+            }}</span>
+            <span
+              class="arb-icon-chevronRight arb-icons-ar fs-3 arb-pointer color-arb-primaryColor"
+              (click)="selectPeriodType()"
+            ></span>
+          </p>
+        </div>
+      </div>
+    </app-chart>
+  </div>
+</div>
+
+<arb-title
+  id="accounts-list-title-id"
+  [title]=""
+  [type]="'Section'"
+  [endButtons]="accountList"
+></arb-title>
+
+<app-form
+  [forms]="forms"
+  (onButtonClick)="onAccountSelection($event)"
+></app-form>

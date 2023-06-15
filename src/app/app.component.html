@@ -1,0 +1,18 @@
+<div class="mainApp arb-scrollbar mainScroll"  theme >
+<arb-spinner *ngIf="showSpinner"></arb-spinner>
+<router-outlet></router-outlet>
+<app-verification [generateChallengeAndOTP]="generateChallengeAndOTP"
+                  (onComplete)="onOtpCompleted($event)"
+                  (onDismiss)="onOtpDismiss()"
+                  (onEventTrigger)="onEventTrigger($event)"
+                  (onTimeOut)="onOtpDismiss()"
+                  [close]="close"
+></app-verification>
+<app-popup [form]="popupInputModel.form" [image]="popupInputModel.image" [show]="popupShow"
+           [alert]="popupInputModel.alert" [showAlert]="popupInputModel.showAlert || false"
+           [options]="popupInputModel.options" [title]="popupInputModel.title"
+           (onButtonClick)="onPopupButtonClick($event)"></app-popup>
+<div style="display: none">
+  <app-error-modal></app-error-modal>
+</div>
+</div>

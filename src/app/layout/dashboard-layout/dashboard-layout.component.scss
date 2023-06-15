@@ -1,0 +1,106 @@
+@import "../../../assets/scss/colors";
+@import "node_modules/arb-design-library/src/assets/scss/main";
+
+.navbar-brand {
+  box-shadow: $box-shadow-sidebar;
+  padding: 0.8rem 0;
+  text-align: center;
+
+  arb-logo {
+    margin: auto;
+    width: 8rem;
+    display: inline-block;
+  }
+}
+
+.main-padding {
+  padding-top: 2rem;
+}
+
+.navbar {
+  border-bottom: 0.1rem solid $arb-outlineColor;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: $arb-wh-3-5 0 0;
+}
+
+.arb-nav-bg {
+  background-color: $arb-secondaryCard !important;
+  padding: 1rem 0 0 1rem;
+  margin-bottom: 0 !important;
+}
+
+.sidebar-sticky {
+  height: calc(100vh - 5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar-heading {
+  font-size: 0.75rem;
+}
+
+.navbar {
+  .navbar-toggler {
+    top: 0rem;
+    right: 0.5rem;
+    font-size: $h2-font-size;
+    border: 0rem;
+
+    &:focus {
+      box-shadow: none;
+      color: $arb-primaryLogo;
+    }
+  }
+}
+
+@media (max-width: 52.125rem) {
+  .navbar-brand {
+    box-shadow: none;
+    padding: 1rem;
+  }
+}
+
+.nav-scroller {
+  ::ng-deep.arb-btn {
+    padding: 1.1rem;
+  }
+
+}
+
+// end sidebar
+
+
+::ng-deep.popOverMarginTop{
+  margin-top: 1rem!important;
+  .popover-arrow{
+    top: -8rem!important;
+  }
+}
+
+::ng-deep .popover-class-hint {
+  min-width: 20rem;
+  max-width: 30rem;
+  .popover-body {
+    min-width: 20rem;
+  }
+}
+
+//.popoverBackDrop{
+//  position: fixed;
+//  width: 100%;
+//  height: 100%;
+//  left: 0;
+//  top:0;
+//  opacity: 0.2;
+//  background-color: white;
+//  z-index: 100000;
+//  pointer-events: none;
+//}
+

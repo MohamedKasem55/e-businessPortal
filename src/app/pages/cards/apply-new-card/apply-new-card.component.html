@@ -1,0 +1,17 @@
+<arb-title
+  id="card-apply-new-title"
+  [showArrow]="true"
+  (onButtonClick)="onBackClick($event)"
+  [stepper]="pageTitle.stepper"
+  [title]="'cards.new-card.apply-for-card' | translate"
+>
+</arb-title>
+<div class="col-12">
+  <arb-generic-feature-listing-group
+    id="cards"
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 justify-content-center g-2"
+    [list]="cardsList"
+    (onButtonClick)="doApplyNow($event)"
+  >
+  </arb-generic-feature-listing-group>
+</div>

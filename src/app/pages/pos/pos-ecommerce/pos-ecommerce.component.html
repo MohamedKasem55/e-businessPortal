@@ -1,0 +1,20 @@
+<div class="col-12">
+  <div class="row">
+    <arb-title
+      type="Page"
+      id="pos-ecommerce-title"
+      [showArrow]="true"
+      [title]="'pos.e-commerce.title' | translate"
+      (onButtonClick)="onTitleButtonClick($event)"
+    ></arb-title>
+  </div>
+  <div class="row">
+    <arb-box-list
+      id="pos-boxes"
+      action="onHover"
+      [columnCount]="2"
+      [box]="boxes"
+      (onClick)="onBoxSelect($event)"
+    ></arb-box-list>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<arb-alert
+  *ngIf="alert"
+  [id]="alert.id"
+  [title]="alert.title || ''"
+  [type]="alert.type"
+  [message]="alert.message"
+  [showClose]="alert.showClose"
+  (onClose)="alertClose()"
+></arb-alert>
+
+<arb-title
+  id="card-details-title"
+  [showArrow]="true"
+  (onButtonClick)="onBackClick($event)"
+  [title]="'cards.card-info' | translate"
+>
+</arb-title>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+    <arb-card-presentation
+      [id]="'displayed-card-list'"
+      [hideLeftArrow]="!ownerCardsList || ownerCardsList.length <= 1"
+      [hideRightArrow]="!ownerCardsList || ownerCardsList.length <= 1"
+      [currentCardIndex]="selectedIndex"
+      [cardInfo]="cardInfo"
+      [size]="userCardsSize"
+      (onCurrentCardIndexChange)="onCurrentCardIndexChange($event)"
+    >
+    </arb-card-presentation>
+  </div>
+  <div class="col-12 col-sm-12 col-md-8 col-lg-4 col-xl-4">
+    <arb-buttons-list
+      [title]="isActiveCard ? 'Card Options' : ''"
+      [subTitle]="isActiveCard ? '' : 'Activate the card to start using it.'"
+      [buttons]="isActiveCard ? cardActionsBtns : activateBtn"
+      (onButtonClick)="onCardActionBtnClick($event)"
+    >
+    </arb-buttons-list>
+  </div>
+</div>
+<div class="row pt-4">
+  <arb-title
+    [id]="cardTransactionsTitle.id"
+    [type]="cardTransactionsTitle.type"
+    [title]="cardTransactionsTitle.title"
+    [endButtons]="cardTransactionsTitle.endButtons"
+    (onButtonClick)="onTrxDownloadClick($event)"
+  >
+  </arb-title>
+</div>
+<div class="row">
+  <div class="col-12">
+    <arb-tabs
+      id="cards-tabs"
+      [tabs]="transactionsTabs"
+      [value]="currentTrxTab"
+      (onChange)="trxTabChanged($event)"
+    >
+    </arb-tabs>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12" *ngIf="currentTrxTab == tabsConst.transactions">
+    <arb-datatable
+      id="credit-transactions"
+      [showSearch]="true"
+      [exportFileName]="'Request Status'"
+      [title]="'public.request-status'"
+      [headers]="lastTransctionsHeaders"
+      [data]="transactionsListTableModel"
+      [paginationValue]="{ page: 1, size: 50 }"
+      [total]="transactionsListTableModel.length"
+      [hasCheckbox]="false"
+      [maxDisplayRow]="20"
+      [columnId]="'number'"
+    >
+    </arb-datatable>
+  </div>
+</div>

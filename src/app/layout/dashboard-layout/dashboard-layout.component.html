@@ -1,0 +1,106 @@
+<!--<div class="popoverBackDrop" *ngIf="showWizard"></div>-->
+<header class="navbar navbar-light sticky-top flex-md-nowrap p-0 bg-arb-secondaryCard position-fixed col-12">
+  <div class="navbar-brand col-md-3 col-lg-2 me-0">
+    <arb-logo></arb-logo>
+  </div>
+  <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
+          (click)="toggleMenuEvent()">
+    <svg #menuIcon class="ham hamRotate ham8" viewBox="0 0 100 100" width="80"
+         onclick="this.classList.toggle('active')">
+      <path class="line top"
+            d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20">
+      </path>
+      <path class="line middle" d="m 30,50 h 40"></path>
+      <path class="line bottom"
+            d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path>
+    </svg>
+  </button>
+  <div class="d-flex my-auto d-none d-sm-none d-md-none d-lg-block px-3 flex-grow-1">
+    <p class="font-subhead-semi-bold color-arb-primaryText mb-0">{{ date | date : "EEE d MMMM yyyy h:mm:a" }}</p>
+    <div class="font-subhead-semi-bold flex-grow-1">
+      <arb-breadcrumbs id="breadcrumb-lg" [breadcrumbs]="breadcrumb"></arb-breadcrumbs>
+    </div>
+  </div>
+  <div class="nav-scroller my-auto d-none d-sm-none d-md-flex gap-2 mx-3">
+    <arb-search-list class="my-auto" id="search" [type]="'collapse'" [value]="''" [options]="globalSearchList"
+                     (OnClick)="onSearchItemSelect($event)"
+                     [ngbPopover]="popContent" placement="bottom" #searchPopover="ngbPopover" id="searchPopover"
+                     [autoClose]="false"
+                     popoverClass="popover-class  popover-class-hint" triggers="manual"
+    ></arb-search-list>
+    <arb-button class="my-auto" [id]="'notification'" type="primaryCard"
+                [prefixIcon]="'arb-icon-bell color-arb-secondaryText'" [numberBadge]="totalNotification"
+                [options]="topBarNotifications" [hidden]="!showPendingActions"
+                (onClick)="goToPendingActionsLink($event)"
+                [ngbPopover]="popContent" placement="bottom" #notificationPopover="ngbPopover" [autoClose]="false"
+                popoverClass="popover-class  popover-class-hint" triggers="manual"
+    ></arb-button>
+
+    <arb-ribbon *ngIf="subsidiariesModel.subsidiaries?.length! > 0" (onSelect)="changeCurrentCompany($event)"
+                [selectedID]="subsidiariesModel.currentSubsidiaryId || ''"
+                [list]="subsidiariesModel.subsidiaries || []"></arb-ribbon>
+
+    <arb-line-card [id]="'profileMenu'" [hasBackground]="true" [title]="userName" [subTitle]="companyName"
+                   [avatar]="avatar" [rightIcon]="'arb-icon-chevronDown'" [options]="profileMenuItems"
+                   (onButtonClick)="onUserMenuClick($event)"
+                   [ngbPopover]="popContent" placement="bottom-end" #userPopover="ngbPopover" [autoClose]="false"
+                   popoverClass="popover-class  popover-class-hint" triggers="manual"></arb-line-card>
+  </div>
+</header>
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse mt-3"
+         [ngClass]="toggleMenu ? 'hide' : 'show'">
+      <div class="arb-nav-bg d-flex flex-wrap mb-2 d-xl-none d-lg-none d-md-none">
+        <div class="d-flex gap-2 w-100 pe-2">
+          <arb-line-card class="flex-grow-1" [id]="'profileMenu'" [hasBackground]="true" [title]="userName" [subTitle]="companyName"
+                         [avatar]="avatar" [rightIcon]="'arb-icon-chevronDown'" [options]="profileMenuItems"
+                         (onButtonClick)="onUserMenuClick($event)"></arb-line-card>
+
+          <arb-button class="my-auto" [id]="'notification'" [hidden]="!showPendingActions" type="primaryCard"
+                      [prefixIcon]="'arb-icon-bell color-arb-secondaryText'" [numberBadge]="totalNotification"
+                      [options]="topBarNotifications" (onClick)="goToPendingActionsLink($event)"></arb-button>
+        </div>
+        <div class="w-100"  *ngIf="subsidiariesModel.subsidiaries?.length! > 0">
+          <arb-ribbon *ngIf="subsidiariesModel.subsidiaries?.length! > 0" (onSelect)="changeCurrentCompany($event)"
+                      [selectedID]="subsidiariesModel.currentSubsidiaryId || ''"
+                      [list]="subsidiariesModel.subsidiaries || []"></arb-ribbon>
+        </div>
+        <div class="d-flex gap-2 pt-3">
+
+        </div>
+      </div>
+      <div class="h-100" [ngbPopover]="popContent" placement="right" #menuPopover="ngbPopover" [autoClose]="false"
+           popoverClass="popover-class  popover-class-hint" triggers="manual">
+        <arb-side-menu [items]="menu" (onClick)="onClick($event)"
+                       [displayLightMenu]="displayLightMenu" (onLightMenuToggleChange)="lightMenuToggleChange($event)"
+                       [ngbPopover]="popContent" placement="right-top"
+                       #dashboardPopover="ngbPopover" [autoClose]="false"
+                       popoverClass="popover-class  popover-class-hint  popOverMarginTop"
+                       triggers="manual"></arb-side-menu>
+      </div>
+    </nav>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-3 main-padding mt-5">
+      <div class="pt-1 ">
+      <!-- show on device -->
+      <div class="d-flex flex-wrap mb-2 d-xl-none d-lg-none">
+        <div class="font-subhead-semi-bold flex-grow-1">
+          <arb-breadcrumbs id="breadcrumb-sm" [breadcrumbs]="breadcrumb"></arb-breadcrumbs>
+        </div>
+        <div class="font-subhead-semi-bold color-arb-primaryText">{{ date | date : "EEE d MMMM yyyy h:mm:a" }}</div>
+      </div>
+      <!-- end show on device -->
+      <!-- container -->
+      <router-outlet></router-outlet>
+      <!-- end container -->
+      </div>
+    </main>
+  </div>
+</div>
+
+<ng-template #popContent>
+  <app-help-wizard [popTitle]="popTitle" [popText]="popText" (next)="next()" (skip)="skip()">
+  </app-help-wizard>
+</ng-template>
+

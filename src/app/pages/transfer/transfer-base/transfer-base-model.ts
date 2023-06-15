@@ -1,0 +1,1 @@
+export let TypeActionControlModel!: 'hide' | 'reset' | 'show' | 'delete' | 'activeValidation';

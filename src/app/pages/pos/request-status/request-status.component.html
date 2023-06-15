@@ -1,0 +1,33 @@
+<arb-title
+  type="Page"
+  id="requestStatusTitle"
+  [showArrow]="true"
+  [title]="'requestStatus.title' | translate"
+  (onButtonClick)="onTitleButtonsClick($event)"
+></arb-title>
+<div class="row mt-3 mb-0" *ngIf="hasTabs">
+  <arb-tabs
+    id="requestStatusTabs"
+    [tabs]="tabs"
+    [value]="type"
+    (onChange)="tabChanged($event)"
+  ></arb-tabs>
+</div>
+<div class="row p-3">
+  <arb-datatable
+    id="request-status-table"
+    [columnId]="'batchPk'"
+    [showFilter]="true"
+    [showSearch]="true"
+    [headers]="headers"
+    [data]="data"
+    [paginationValue]="paginationValue"
+    [title]="'requestStatus.title'"
+    [total]="total"
+    [exportFileName]="exportFileName"
+    [pageSizes]="[10, 20, 50, 100]"
+    (onFilterClick)="onFilterClick()"
+    (externalPagination)="externalPagination($event)"
+  >
+  </arb-datatable>
+</div>

@@ -1,0 +1,31 @@
+<div class="col-12">
+  <div class="row">
+    <arb-title
+      type="Page"
+      id="TerminalsListTitle"
+      [showArrow]="true"
+      [title]="'pos.e-commerce.list-of-terminals.title'"
+      (onButtonClick)="onTitleButtonClick($event)"
+    ></arb-title>
+  </div>
+  <div class="row">
+    <arb-datatable
+      id="pos-ecommerce-terminals-list-table"
+      [columnId]="''"
+      [showSearch]="true"
+      [showFilter]="true"
+      [headers]="headers"
+      [data]="data"
+      [exportFileName]="exportFileName"
+      [paginationValue]="{ page: 1, size: 10 }"
+      [maxDisplayRow]="50"
+      [total]="total"
+      [visibleRangeLength]="10"
+      [pageSizes]="[10, 20, 50]"
+      (buttonClicked)="onTerminalClicked($event)"
+      (onFilterClick)="onFilterClick()"
+      [title]="'pos.e-commerce.list-of-terminals.sub-title'"
+    >
+    </arb-datatable>
+  </div>
+</div>

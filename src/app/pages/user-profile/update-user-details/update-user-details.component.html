@@ -1,0 +1,89 @@
+<div class="col-12">
+  <div class="row" *ngIf="currentActiveTab === tabs[0].value">
+    <arb-title
+      [id]="'updateUserDetailsId'"
+      [showArrow]="false"
+      [title]="'updateUserDetails.userUpdateTitle' | translate"
+    >
+    </arb-title>
+  </div>
+  <div class="row" *ngIf="currentActiveTab === tabs[1].value">
+    <arb-title
+      [id]="'resetpwdQuesztionId'"
+      [showArrow]="false"
+      [title]="'updateUserDetails.updateResetPasswordQuestion' | translate"
+    >
+    </arb-title>
+  </div>
+</div>
+<div class="col-12 m-auto mb-5">
+  <div class="row">
+    <div class="col-12">
+      <arb-tabs
+        id="cards-tabs"
+        [tabs]="tabs"
+        [value]="currentActiveTab"
+        (onChange)="tabChanged($event)"
+      ></arb-tabs>
+      <div
+        class="row"
+        *ngIf="
+          currentActiveTab === tabs[0].value &&
+          pageTitle?.stepper?.stepCounter === 1
+        "
+      >
+        <arb-title
+          [id]="'updateUserDetailsId'"
+          [title]="'updateUserDetails.userUpdate' | translate"
+        >
+        </arb-title>
+      </div>
+      <div
+        class="row"
+        *ngIf="
+          currentActiveTab === tabs[1].value &&
+          pageTitle?.stepper?.stepCounter === 1
+        "
+      >
+        <arb-title
+          [id]="'resetpwdQuesztionId'"
+          [showArrow]="false"
+          [title]="'updateUserDetails.completeDetails' | translate"
+        >
+        </arb-title>
+      </div>
+      <div
+        class="row"
+        *ngIf="
+          currentActiveTab === tabs[0].value &&
+          pageTitle?.stepper?.stepCounter === 1
+        "
+      >
+        <div class="col">
+          <arb-user-card
+            id="userCard"
+            [title]="''"
+            pillText="Active"
+            pillType="Positive"
+            [avatarValue]="avatarImage"
+            avatarType="img"
+          >
+          </arb-user-card>
+        </div>
+      </div>
+      <app-transaction-follow
+        [pages]="pages"
+        [pageTitle]="pageTitle"
+        [alert]="alert"
+        [startButtons]="startButtons"
+        [endButtons]="endButtons"
+        [summary]="summary"
+        [result]="result"
+        (onResultChanged)="onResultChanged($event)"
+        (onButtonClick)="onButtonClick($event)"
+        (onAlertAction)="onAlertAction($event)"
+      >
+      </app-transaction-follow>
+    </div>
+  </div>
+</div>

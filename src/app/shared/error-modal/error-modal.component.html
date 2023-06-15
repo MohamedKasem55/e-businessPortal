@@ -1,0 +1,53 @@
+<ng-template #errorModal let-c="close" let-d="dismiss">
+  <app-modal-wrapper>
+    <div class="modal-header d-flex">
+      <h4
+        class="color-arb-primaryText font-h2-bold flex-grow-1 text-start"
+        id="modal-basic-title"
+      >
+        {{ "public.error" | translate }}
+      </h4>
+      <arb-button
+        class="float-end"
+        type="outLine"
+        [id]="'close'"
+        prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+        (onClick)="d('Cross click')"
+      >
+      </arb-button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <img src="assets/img/error.svg" />
+      </div>
+      <div class="color-arb-primaryText">
+        {{ "public.timestamp" | translate }}
+        <h5 class="font-subhead-semi-bold color-arb-primaryText px-3">
+          {{ date | date : "medium" }}
+        </h5>
+      </div>
+
+      <div class="color-arb-primaryText my-3">
+        {{ "public.description" | translate }}
+        <h5
+          class="font-subhead-semi-bold px-3 color-arb-negativeText"
+          *ngIf="errorResponse?.errorDescription; else otherCondition"
+        >
+          {{ errorResponse.errorDescription | translate }}
+        </h5>
+        <ng-template #otherCondition>
+          <h5 class="font-subhead-semi-bold px-3 color-arb-negativeText">
+            {{ errorResponse.errorResponse.description | translate }}
+          </h5>
+        </ng-template>
+      </div>
+
+      <div class="color-arb-primaryText">
+        {{ "public.refNo" | translate }}
+        <h5 class="font-subhead-semi-bold px-3 color-arb-primaryText">
+          {{ errorResponse?.errorResponse?.reference }}
+        </h5>
+      </div>
+    </div>
+  </app-modal-wrapper>
+</ng-template>

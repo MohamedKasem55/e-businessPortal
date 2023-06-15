@@ -1,0 +1,20 @@
+<arb-title
+  id="vat-title-id"
+  [title]="'accounts.vat-title' | translate"
+  [showArrow]="true"
+  (onButtonClick)="doButtonClick($event)"
+></arb-title>
+
+<arb-dividers [type]="'hr'"></arb-dividers>
+<arb-title
+  id="vat-id"
+  [title]="'accounts.vat-statement' | translate"
+></arb-title>
+<app-form [form]="forms" (onResultChanged)="onResultChange($event)"></app-form>
+<div class="row">
+  <arb-bottom-buttons
+    class="pt-4"
+    [endButtons]="endButtons"
+    (onClick)="doButtonClick($event)"
+  ></arb-bottom-buttons>
+</div>

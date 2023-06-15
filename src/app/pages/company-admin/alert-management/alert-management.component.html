@@ -1,0 +1,22 @@
+<arb-title type="Page" id="alertManagement" [showArrow]="true"
+           [title]="'company-admin.alert-management.alert-management-name'|translate"
+           (onButtonClick)="onTitleButtonClick($event)" [endButtons]="titleEndButton"></arb-title>
+<arb-tabs id="alertManagementTabs" [tabs]="tabs" [value]="type" (onChange)="tabChanged($event)"></arb-tabs>
+
+<ng-container>
+  <arb-datatable id="user-approval-table" [columnId]="'userPk'" [showSearch]="false" [hasCheckbox]="true"
+                 [isDisabled]="false"
+                 [showFilter]=" true" [headers]="headers" [data]="data" [paginationValue]="paginationValue"
+                 [pageSizes]=" [10, 20, 50, 100]"
+                 [exportFileName]="exportFileName"
+                 (externalPagination)="externalPagination($event)"
+                 (onFilterClick)="openSearch()" [filterIsActive]="filterIsActive"
+                 (onSelectChange)="doValueChanged($event)"
+                 [title]="'company-admin.alert-management.alert-management-name'">
+  </arb-datatable>
+</ng-container>
+<arb-dividers></arb-dividers>
+<div class="row">
+  <arb-bottom-buttons [endButtons]="[endButton]" (onClick)="onButtomEndButtonClicked()">
+  </arb-bottom-buttons>
+</div>

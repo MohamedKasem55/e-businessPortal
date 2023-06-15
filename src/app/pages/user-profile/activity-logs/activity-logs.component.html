@@ -1,0 +1,80 @@
+<ng-container *ngIf="!isFileRequested">
+  <div class="col-12">
+    <div class="row">
+      <arb-title
+        [id]="'activityLogId'"
+        [showArrow]="true"
+        [title]="'activityLogs.activitylogsTitle' | translate"
+        [endButtons]="endButtons"
+        (onButtonClick)="onTitleActionsClick($event)"
+      >
+      </arb-title>
+    </div>
+  </div>
+  <div class="col-12 m-auto mb-5">
+    <div class="row">
+      <div class="col-12">
+        <arb-tabs
+          id="cards-tabs"
+          [tabs]="tabs"
+          [value]="currentActiveTab"
+          (onChange)="tabChanged($event)"
+        ></arb-tabs>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="currentActiveTab === tabs[0].value">
+    <arb-datatable
+      id="activityLogsTable"
+      [showSearch]="true"
+      [showFilter]="true"
+      [headers]="activityLogsTableHeaders"
+      [data]="activityLogsTableData"
+      [total]="totalActivityLogs"
+      [paginationValue]="paginationValue"
+      [maxExportCount]="400"
+      [hasCheckbox]="false"
+      [exportFileName]="exportActivityLogsfileName"
+      [title]="tabs[0].text"
+      [columnId]="'auditLinePk'"
+      (onFilterClick)="onLogsTableFilterClicked()"
+      (externalPagination)="externalPagination($event)"
+      (buttonClicked)="onLogClicked($event)">
+    </arb-datatable>
+  </div>
+
+  <div class="col-12" *ngIf="currentActiveTab === tabs[1].value">
+    <arb-datatable
+      id="auditReportFilesTable"
+      [hasCheckbox]="true"
+      [showSearch]="true"
+      [headers]="auditReportFilesTableHeaders"
+      [data]="auditReportFilesTableData"
+      (onSelectChange)="OnAuditReportTableChecked($event)"
+      [total]="totalAuditReportFiles"
+      [paginationValue]="paginationValue"
+      [exportFileName]="exportAuditReportFilesfileName"
+      [columnId]="'key'"
+      [title]="tabs[1].text"
+      (externalPagination)="externalPagination($event)"
+      (buttonClicked)="onFileNameClicked($event)"
+    >
+    </arb-datatable>
+    <div class="mt-3">
+      <arb-title
+        [id]="'deleteFilesBtn'"
+        (onButtonClick)="onDeleteClicked($event)"
+        [title]=""
+        [endButtons]="requestedFilesEndButtons"
+      ></arb-title>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isFileRequested">
+  <app-result [result]="result"></app-result>
+  <arb-bottom-buttons
+    [endButtons]="resultEndButtons"
+    (onClick)="onButtonClick($event)"
+  ></arb-bottom-buttons>
+</ng-container>

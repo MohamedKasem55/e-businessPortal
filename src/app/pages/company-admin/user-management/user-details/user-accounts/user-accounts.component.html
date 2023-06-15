@@ -1,0 +1,42 @@
+<ng-container *ngIf="editMode === 'VIEW'">
+  <div class="row">
+    <div class="col">
+      <arb-datatable
+        [id]="'accountsListID'"
+        [headers]="headers"
+        [data]="accList"
+        [hasCheckbox]="false"
+        [paginationValue]="{ page: 1, size: 5 }"
+        [pageSizes]="[5, 10, 20, 50, 100]"
+        [columnId]="'userPk'"
+        [title]="pageTitle.title"
+      >
+      </arb-datatable>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pt-3">
+      <arb-title
+        [id]="page2Title.id"
+        [type]="page2Title.type"
+        [title]="page2Title.title"
+      >
+      </arb-title>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 pb-2" *ngFor="let data of accountPrivilegesList">
+      <arb-selection-group
+        [isDisabled]="true"
+        [items]="data.items"
+        [title]="data.title"
+        [textOnStart]="false"
+      ></arb-selection-group>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <arb-summary [sections]="[limitsPrivilegesSection]"></arb-summary>
+    </div>
+  </div>
+</ng-container>

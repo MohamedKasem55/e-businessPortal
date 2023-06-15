@@ -1,0 +1,89 @@
+<arb-title
+  id="accounts-title-id"
+  [showArrow]="true"
+  [title]="'payments.esal.analytics' | translate"
+  (onButtonClick)="onTitleButtonsClick($event)"
+></arb-title>
+
+<div
+  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3"
+>
+  <div class="col-6">
+    <arb-dropdown
+      [label]="'payments.esal.select-date' | translate"
+      id="selectDate"
+      [columnId]="''"
+      [textField]="'date'"
+      [options]="optionsList"
+      [disabledField]="'isDisabled'"
+      (onValueChanged)="selectDate($event)"
+      class="pb-3"
+    >
+    </arb-dropdown>
+  </div>
+  <div class="col-6">
+    <arb-amount-input
+      inputType="amount"
+      id="amountEnabled"
+      currency="608"
+      [label]="'public.amount' | translate"
+      [value]="headerAmountValue"
+      [isDisabled]="isDisabled"
+    >
+    </arb-amount-input>
+  </div>
+</div>
+<ng-container *ngIf="showCharts">
+<div class="row">
+  <div class="col-12">
+    <arb-dividers></arb-dividers>
+  </div>
+</div>
+<div class="row mt-4">
+  <arb-title
+    [id]="'charts-title'"
+    [title]="'payments.esal.monthly-payment-overview' | translate"
+    type="Section"
+  >
+  </arb-title>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <app-chart
+      [chartData]="esalAmountBarChartData"
+      [chartOptions]="barChartOptions"
+      [showHeader]="true"
+      [showChart]="showBarChart"
+    >
+    </app-chart>
+  </div>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <app-chart
+      [chartData]="esalAmountDoughnutChartData"
+      [chartOptions]="doughnutChartOptions"
+      [showHeader]="true"
+      [showChart]="showDoughnutChart"
+    >
+    </app-chart>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <arb-dividers></arb-dividers>
+  </div>
+</div>
+<div class="row">
+  <arb-datatable
+    id="monthly-statistics-table"
+    [showSearch]="false"
+    [headers]="headers"
+    [data]="data"
+    [columnId]="'supplierID'"
+    [paginationValue]="paginationValue"
+    [pageSizes]="[5, 10, 20, 50, 100]"
+    [total]="total"
+    [visibleRangeLength]="5"
+    [title]="'payments.esal.monthly-payment-overview'"  >
+  </arb-datatable>
+</div>
+</ng-container>

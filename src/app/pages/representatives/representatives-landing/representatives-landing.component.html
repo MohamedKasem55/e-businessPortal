@@ -1,0 +1,33 @@
+<arb-title
+  [id]="pageTitle.id"
+  [type]="pageTitle.type || 'Page'"
+  [title]="pageTitle.title"
+  [endButtons]="[addButton]"
+  (onButtonClick)="navigateAdd()"
+>
+</arb-title>
+
+<arb-datatable
+  id="representatives"
+  [showSearch]="true"
+  [showFilter]="true"
+  [filterIsActive]="false"
+  [headers]="header"
+  [data]="data"
+  [paginationValue]="{ page: 1, size: 100 }"
+  [hasCheckbox]="true"
+  [maxDisplayRow]="105"
+  [columnId]="'repID'"
+  (onSelectChange)="selectRep($event)"
+  (buttonClicked)="navigateAdd($event)"
+  (onFilterClick)="onFilterClick()"
+  [title]="pageTitle.title"
+>
+</arb-datatable>
+
+<div class="row mt-4"></div>
+
+<arb-bottom-buttons
+  [endButtons]="[delButton]"
+  (onClick)="onTrashClicked()"
+></arb-bottom-buttons>

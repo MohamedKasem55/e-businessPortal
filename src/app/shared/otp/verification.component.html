@@ -1,0 +1,22 @@
+<ng-template #verificationModal let-modal>
+  <app-modal-wrapper>
+    <div class="modal-title position-relative">
+      <arb-button
+        class="float-end"
+        type="outLine"
+        [id]="'close'"
+        prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+        (onClick)="dismissModal()"
+      >
+      </arb-button>
+    </div>
+    <div class="modal-body">
+      <arb-verification
+        class="col-12"
+        [verification]="verification"
+        (onEventTrigger)="completeVerification($event)"
+        (onTimeOut)="timeOut()"
+      ></arb-verification>
+    </div>
+  </app-modal-wrapper>
+</ng-template>

@@ -1,0 +1,154 @@
+<ng-container *ngIf="editMode === 'VIEW' && !showStatus">
+  <div class="row">
+    <div class="col">
+      <arb-title
+        [id]="pageTitle.id"
+        [type]="pageTitle.type"
+        [title]="pageTitle.title"
+        [showArrow]="true"
+        (onButtonClick)="onBackArrowClick()"
+      >
+      </arb-title>
+    </div>
+  </div>
+  <div class="row" *ngIf="editMode === 'VIEW'">
+    <div class="col">
+      <arb-user-card
+        *ngIf="userCard?.userName"
+        [title]="userCard.userName"
+        [subTitle]="userCard.type"
+        [desc]="userCard.loginId"
+        [avatarValue]="userCard.image"
+        id="userCard"
+        avatarType="img"
+        [pillText]="getUserStatus()"
+        [pillType]="
+          userDetails.companyUserDetails.userStatus === 'A'
+            ? 'Positive'
+            : userDetails.companyUserDetails.userStatus === 'I'
+            ? 'Warning'
+            : 'Negative'
+        "
+      >
+      </arb-user-card>
+    </div>
+    <div
+      *ngIf="editMode === 'VIEW'"
+      class="col d-flex justify-content-end align-items-center"
+    >
+      <arb-title
+        [id]="'user-management-title'"
+        (onButtonClick)="onActionsButtonClick($event)"
+        [endButtons]="viewEndButtons"
+      ></arb-title>
+    </div>
+  </div>
+  <div class="col-12 m-auto">
+    <div class="row">
+      <div class="col-10 d-flex align-items-center">
+        <arb-tabs
+          *ngIf="workFlowType !== 'BASIC' && workFlowType !== 'MAKER_CHECKER'"
+          id="arb-tabs-en"
+          [tabs]="tabs"
+          [value]="currentTab"
+          (onChange)="tabChanged($event)"
+        >
+        </arb-tabs>
+      </div>
+      <div class="col-2" *ngIf="editMode === 'VIEW'">
+        <arb-button
+          [id]="editButton.id"
+          [type]="editButton.type"
+          [prefixIcon]="editButton.prefixIcon"
+          [text]="editButton.text"
+          (onClick)="onEditClick()"
+        >
+        </arb-button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="currentTab == '1' && userDetails">
+    <div class="col-12">
+      <div class="tab">
+        <app-user-info
+          [userDetails]="userDetails"
+          [editMode]="editMode"
+          [workFlowType]="workFlowType"
+        ></app-user-info>
+      </div>
+    </div>
+  </div>
+  <div
+    class="row"
+    *ngIf="
+      currentTab == '2' &&
+      workFlowType !== 'BASIC' &&
+      workFlowType !== 'MAKER_CHECKER'
+    "
+  >
+    <div class="col-12">
+      <div class="tab">
+        <app-user-accounts
+          [userDetails]="userDetails"
+          [editMode]="editMode"
+        ></app-user-accounts>
+      </div>
+    </div>
+  </div>
+  <div
+    class="row"
+    *ngIf="
+      currentTab == '3' &&
+      workFlowType !== 'BASIC' &&
+      workFlowType !== 'MAKER_CHECKER'
+    "
+  >
+    <div class="col-12">
+      <div class="tab">
+        <app-user-privileges
+          [userDetails]="userDetails"
+          [eTradeDtls]="eTradeDtls"
+        ></app-user-privileges>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="editMode === 'ADD' && !showStatus">
+  <div class="col-12 m-auto m" *ngIf="pages">
+    <app-transaction-follow
+      [pageTitle]="pageTitle"
+      [pages]="pages"
+      [summary]="summary"
+      (onResultChanged)="onResultChange($event)"
+      [startButtons]="startButtons"
+      [endButtons]="endButtons"
+      (onButtonClick)="onButtonClick($event)"
+    >
+    </app-transaction-follow>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="editMode === 'EDIT' && !showStatus">
+  <div class="col-12 m-auto m" *ngIf="pages">
+    <app-transaction-follow
+      [pageTitle]="pageTitle"
+      [pages]="pages"
+      [summary]="summary"
+      (onResultChanged)="onResultChange($event)"
+      [startButtons]="startButtons"
+      [endButtons]="endButtons"
+      (onButtonClick)="onButtonClick($event)"
+    >
+    </app-transaction-follow>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="showStatus">
+  <app-result [result]="result"></app-result>
+  <arb-bottom-buttons
+    class="pt-4"
+    [endButtons]="[startSuccessButtons[0], endSuccessButtons[0]]"
+    (onClick)="doButtonClick($event)"
+  ></arb-bottom-buttons>
+</ng-container>

@@ -1,0 +1,134 @@
+<div class="arb-login d-flex">
+  <div class="container">
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-5 login-form">
+          <div class="p-4 pb-1">
+            <div class="row">
+              <arb-title
+                class="px-4 pb-3"
+                [id]="title.id"
+                [type]="title.type"
+                [title]="title.title"
+                [subTitle]="title.subTitle"
+              ></arb-title>
+            </div>
+            <div class="row">
+              <arb-dropdown
+                label="Environment"
+                id="environment"
+                textField="text"
+                [options]="environment"
+                *ngIf="environment"
+                [columnId]="'text'"
+                [value]="environment[0]"
+                class="pb-3"
+                (onValueChanged)="changeEnvironment($event)"
+              ></arb-dropdown>
+              <arb-tabs
+                class="pb-3"
+                [id]="'login-tabs'"
+                [tabs]="tabModels"
+                [value]="selectedTab"
+                (onChange)="changeTabs($event)"
+              >
+              </arb-tabs>
+            </div>
+            <app-normal-login *ngIf="selectedTab && selectedTab === 'Login'">
+            </app-normal-login>
+            <app-login-with-id
+              *ngIf="selectedTab && selectedTab === 'LoginWithID'"
+            >
+            </app-login-with-id>
+            <app-form
+              [forms]="formModel"
+              (onButtonClick)="onClick($event)"
+            ></app-form>
+          </div>
+        </div>
+        <div
+          class="col-12 col-sm-12 col-md-7 col-lg-7 mx-auto d-none d-sm-none d-md-none d-lg-block d-xl-block d-flex"
+        >
+          <div class="d-flex pt-5">
+            <div class="text-center flex-grow-1">
+              <img
+                src="./assets/img/device.png"
+                class="img-fluid"
+                alt=""
+                title=""
+              />
+            </div>
+            <div class="color-arb-primaryText text-start flex-shrink-1 my-auto"  >
+              <div class="pb-2">
+                <span class="font-h1-bold">{{
+                  "public.join-title" | translate
+                }}</span>
+              </div>
+              <span class="font-body-regular">{{ "public.app-desc" | translate }}</span>
+              <div class="py-2 justify-content-center d-flex">
+                <div class="d-flex qrCodeImage"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<ng-template #openOnlineAccount let-modalOpenOnlineAccount>
+  <app-modal-wrapper>
+    <div class="modal-header d-flex">
+      <h2
+        class="color-arb-primaryText font-h2-bold flex-grow-1 text-start"
+        id="openOnlineAccount-title "
+      >
+        {{ "login.opnOnlineAcc" | translate }}
+      </h2>
+      <arb-button
+        class="float-end"
+        type="outLine"
+        [id]="'close'"
+        prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+        (onClick)="onDismiss(modalOpenOnlineAccount)"
+      >
+      </arb-button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12">
+          <arb-box-list
+            id="onlineAccount"
+            (onClick)="onValueChange($event)"
+            action="onSelect"
+            [columnCount]="4"
+            [box]="boxModels"
+          ></arb-box-list>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <arb-bottom-buttons
+        [endButtons]="button"
+        (onClick)="onlineAccountOpening()"
+      ></arb-bottom-buttons>
+    </div>
+  </app-modal-wrapper>
+</ng-template>
+
+<section [ngClass]="!showVideo ? 'arb-hidden' : ''">
+  <div class="videoDiv">
+    <video
+      id="video"
+      #videoRef
+      (ended)="videoEnd()"
+      [muted]="'muted'"
+      [autoplay]="true"
+      (error)="videoEnd()"
+    >
+      <source src="" type="video/webm" />
+    </video>
+  </div>
+</section>

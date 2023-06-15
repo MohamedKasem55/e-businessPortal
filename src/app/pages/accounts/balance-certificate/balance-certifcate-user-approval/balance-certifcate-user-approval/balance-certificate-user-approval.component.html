@@ -1,0 +1,17 @@
+<arb-title (onButtonClick)="onTitleButtonClick($event)" [showArrow]="true" [title]="'public.request-status'"
+           id="userApprovalTitle"
+           type="Page"></arb-title>
+
+<arb-datatable (externalPagination)="externalPagination($event)"
+               [title]="'public.request-status'| translate"
+               [columnId]="''"
+               [data]="data"
+               [exportFileName]="exportFileName"
+               [headers]="headers"
+               [pageSizes]=" [ 10, 20, 50, 100]"
+               [paginationValue]="paginationValue"
+               [showSearch]=" true"
+               [total]="total"
+               [visibleRangeLength]="5"
+               id="user-approval-table">
+</arb-datatable>

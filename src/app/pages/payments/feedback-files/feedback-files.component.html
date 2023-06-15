@@ -1,0 +1,42 @@
+<arb-title
+  type="Page"
+  id="feedbackFilesTitle"
+  [showArrow]="true"
+  [title]="'payments.feedback-files.title' | translate"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+<div class="row my-3">
+  <arb-tabs
+    id="feedbackFilesTabs"
+    [tabs]="tabs"
+    [value]="type"
+    (onChange)="tabChanged($event)"
+  ></arb-tabs>
+</div>
+<div class="row">
+  <arb-datatable
+    id="feedback-files-table"
+    [columnId]="''"
+    [showSearch]="false"
+    [showFilter]="false"
+    [headers]="headers"
+    [data]="data"
+    [exportFileName]="exportFileName"
+    (buttonClicked)="onFileClicked($event)"
+    [title]="'payments.feedback-files.sub-title'"
+  >
+  </arb-datatable>
+</div>
+<div class="row mt-4">
+  <arb-datatable
+    id="files-in-progress-table"
+    [columnId]="''"
+    [showSearch]="false"
+    [showFilter]="false"
+    [headers]="filesInProgressHeader"
+    [data]="filesInProgressData"
+    [exportFileName]="exportFileNameInProgress"
+    [title]="'payments.feedback-files.files-in-progress' "
+  >
+  </arb-datatable>
+</div>

@@ -1,0 +1,114 @@
+@import "../../../../assets/scss/colors";
+@import "node_modules/arb-design-library/src/assets/scss/main";
+
+.arb-login {
+  height: auto;
+
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  .container {
+    .nav {
+      .nav-item {
+        a {
+          font-size: $h5-font-size;
+          color: $arb-primaryColor;
+          font-weight: $font-weight-semibold;
+          padding: 0rem;
+          border-right: 0.1rem solid $arb-outlineColor;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+        }
+      }
+
+      .nav-item:last-child {
+        a {
+          border: 0rem;
+        }
+      }
+    }
+  }
+}
+
+.radio-float {
+  text-align: left;
+
+  [dir="rtl"] {
+    text-align: right;
+  }
+}
+
+::ng-deep .modalHeader .modal-header {
+  border-bottom: none;
+}
+
+::ng-deep .button-end {
+  button {
+    justify-content: end !important;
+  }
+}
+
+::ng-deep .button-start {
+  button {
+    justify-content: start !important;
+  }
+}
+
+.arb-hidden{
+  display: none;
+}
+
+
+.login-form{
+  max-width: 25rem;
+  justify-content: center;
+  display: inline-block;
+}
+
+//Using min-width ----------------------------------------------------------------
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 36rem) {
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 48rem) {
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 62rem) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 75rem) {
+
+}
+
+//Using max-width ----------------------------------------------------------------
+
+// Small devices (landscape phones, less than 575.98px)
+@media (max-width: 35.999rem) {
+
+}
+
+// Small devices (landscape phones, less than 767.98px)
+@media (max-width: 47.999rem) {
+
+}
+
+// Medium devices (tablets, less than 991.98px)
+@media (max-width: 61.999rem) {
+
+}
+
+// Large devices (desktops, less than 1199.98px)
+@media (max-width: 74.999rem) {
+}

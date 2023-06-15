@@ -1,0 +1,21 @@
+<arb-title
+  type="Page"
+  id="PosManagementTitle"
+  [showArrow]="true"
+  [title]="'pos.dashboard.boxes.pos-management.pos-management'"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+
+<div class="d-flex justify-content-center pb-5">
+  <arb-logo></arb-logo>
+</div>
+<arb-dividers></arb-dividers>
+
+<arb-title
+  [id]="'id'"
+  [title]="'pos.dashboard.boxes.pos-management.pos-management-portal'"
+  [subTitle]="'pos.dashboard.boxes.pos-management.pos-management-portal-info'"
+  [endButtons]="endButtons"
+  (onButtonClick)="goToLink()"
+>
+</arb-title>

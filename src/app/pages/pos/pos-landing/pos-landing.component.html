@@ -1,0 +1,21 @@
+<div class="col-12">
+  <div class="row">
+    <arb-title
+      [id]="title.id"
+      [type]="title.type"
+      [title]="title.title"
+      [endButtons]="showPendingActions ? title.endButtons : []"
+      (onButtonClick)="onButtonClick($event)"
+    >
+    </arb-title>
+  </div>
+  <div class="row">
+    <arb-box-list
+      id="pos-boxes"
+      action="onHover"
+      [columnCount]="4"
+      [box]="boxes"
+      (onClick)="onBoxSelect($event)"
+    ></arb-box-list>
+  </div>
+</div>

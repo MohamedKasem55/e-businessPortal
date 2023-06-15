@@ -1,0 +1,20 @@
+<arb-line-card-group
+  id="top-cards"
+  *ngIf="cardsLineCards && cardsLineCards.length"
+  [title]="topCardsTitle"
+  [canShowNoData]="false"
+  [columnCount]="1"
+  [lineCards]="cardsLineCards"
+  (onButtonClick)="onCardClick($event)"
+>
+</arb-line-card-group>
+<div style="height: 15rem;">
+  <arb-buttons-list
+    *ngIf="canApplyForNewCard"
+    [title]="''"
+    [subTitle]="'cards.apply-for-new-card'"
+    [buttons]="applyForCardBtn"
+    (onButtonClick)="applyForCardClick()"
+  >
+  </arb-buttons-list>
+</div>

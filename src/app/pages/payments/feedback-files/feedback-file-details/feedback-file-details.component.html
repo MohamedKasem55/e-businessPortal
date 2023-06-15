@@ -1,0 +1,34 @@
+<arb-title
+  type="Page"
+  id="feedbackFile-details-title"
+  [showArrow]="true"
+  [title]="'payments.feedback-files.file-details.title'"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+<div class="row">
+  <div class="mb-3">
+    <arb-title
+      id="feedbackFileDetails"
+      type="Section"
+      [title]="'payments.feedback-files.file-details.summary'"
+      [endButtons]="endButtons"
+      (onButtonClick)="onDetailsButtonClick($event)"
+    >
+    </arb-title>
+  </div>
+
+  <arb-datatable
+    id="feedback-file-details-table"
+    [columnId]="''"
+    [showSearch]="false"
+    [showFilter]="false"
+    [headers]="headers"
+    [data]="data"
+    [paginationValue]="{ page: 1, size: 50 }"
+    [visibleRangeLength]="5"
+    [pageSizes]="[10, 20, 50, 100]"
+    [exportFileName]="exportFileName"
+    [title]="'payments.feedback-files.file-details.summary'"
+  >
+  </arb-datatable>
+</div>

@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col">
+    <arb-title
+      [id]="pageTitle.id"
+      [type]="pageTitle.type"
+      [title]="pageTitle.title"
+      [showArrow]="true"
+      [endButtons]="showPendingActions ? pageTitle.endButtons : []"
+      (onButtonClick)="onButtonClick($event)"
+    >
+    </arb-title>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <arb-datatable
+      [id]="'processedTrxListID'"
+      (buttonClicked)="onTabelButtonClick($event)"
+      [headers]="headers"
+      [data]="processedTransactionsList"
+      [showSearch]="true"
+      [showFilter]="true"
+      [exportFileName]="'Processed Transactions'"
+      [title]="sectionTitle.title"
+      [paginationValue]="{ page: 1, size: 10 }"
+      [hasCheckbox]="false"
+      [pageSizes]="[5, 10, 20, 50, 100]"
+      [total]="total"
+      [columnId]="'transferBatchPk'"
+      (externalPagination)="pagination($event)"
+      (onFilterClick)="openSearch()"
+    >
+    </arb-datatable>
+  </div>
+</div>

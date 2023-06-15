@@ -1,0 +1,24 @@
+<arb-title
+  type="Page"
+  id="cardsApprovalTitle"
+  [showArrow]="true"
+  [title]="'cardsApproval.title' | translate"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+<ng-container>
+  <arb-datatable
+    id="cards-user-approval-table"
+    [showSearch]="true"
+    [headers]="headers"
+    [data]="data"
+    [columnId]="'batchPk'"
+    [paginationValue]="paginationValue"
+    [total]="total"
+    [visibleRangeLength]="5"
+    [pageSizes]="[10, 20, 50, 100]"
+    [title]="'cardsApproval.title'"
+    (buttonClicked)="goToReject($event)"
+    (externalPagination)="externalPagination($event)"
+  >
+  </arb-datatable>
+</ng-container>

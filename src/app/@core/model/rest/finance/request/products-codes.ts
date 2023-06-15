@@ -1,0 +1,11 @@
+export enum FinanceProductCode{
+  FLEET = "FLEET_FINANCE_COMMERCIAL_VEHICLE",
+  POS ="POS_FINANCING",
+  BIF = "BIF_FINANCING",
+  ECOMMERCE = "ECOMMERCE_FINANCING",
+  FLEET_CONTRACT = 'FleetContract',
+  POS_CONTRACT = 'POS_LAC',
+  POS_SELLING = 'SellingContract',
+  FIRST_IVR = 'FIRST_IVR_CALL',
+}
+

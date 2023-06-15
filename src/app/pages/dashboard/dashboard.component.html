@@ -1,0 +1,72 @@
+<arb-alert
+  *ngIf="alert"
+  [id]="alertNationalAddress.id"
+  [title]="alertNationalAddress.title || ''"
+  [message]="alertNationalAddress.message"
+  [action]="alertNationalAddress.action || '' | translate"
+  [showClose]="alertNationalAddress.showClose"
+  [type]="alertNationalAddress.type"
+  (onAction)="resetAndNavigateUpdateAddress(true)"
+  (onClose)="resetAndNavigateUpdateAddress()"
+></arb-alert>
+
+<div class="row mb-4">
+  <app-accounts-presentation-wrapper [hasBackground]="false" [accountResponse]="accounts"
+                                     [ngbPopover]="popContent" placement="bottom" #accountPopover="ngbPopover"
+                                     [autoClose]="false"
+                                     popoverClass="popover-class  popover-class-hint" triggers="manual">
+  </app-accounts-presentation-wrapper>
+</div>
+
+<div class="px-2">
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-8 mb-4">
+      <app-accounts-section class="min-div-height" (onAccountsFetching)="setAccounts($event)">
+      </app-accounts-section>
+    </div>
+    <div class="col-12 col-md-12 col-lg-4 mb-4">
+      <app-pending-actions-section *ngIf="showPendingActions"
+                                   [ngbPopover]="popContent" placement="left" #pendingActionPopover="ngbPopover"
+                                   [autoClose]="false"
+                                   popoverClass="popover-class  popover-class-hint" triggers="manual">
+      </app-pending-actions-section>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mb-4">
+      <arb-campaign [campaignItems]="campaignItems" (onClick)="campaignSelect($event)"
+                    [ngbPopover]="popContent" placement="bottom" #campaignPopover="ngbPopover" [autoClose]="false"
+                    popoverClass="popover-class  popover-class-hint" triggers="manual"></arb-campaign>
+    </div>
+  </div>
+
+  <div class="row " *ngIf="canCallDashboardService">
+    <div class="col-12 col-md-12 col-lg-6 mb-4">
+      <app-bills-section class="min-div-height-with-image"
+                         [billsList]="topBillsList">
+      </app-bills-section>
+    </div>
+    <div class="col-12 col-md-12 col-lg-6 mb-4">
+      <app-transfers-section class="min-div-height-with-image"
+                             [transfersList]="topTransfersList">
+      </app-transfers-section>
+    </div>
+  </div>
+
+  <div class="row">
+    <app-inflow-insights-section *ngIf="eligibleJuridicalState"></app-inflow-insights-section>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-6 mb-4">
+      <app-top-cards-section></app-top-cards-section>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #popContent>
+  <app-help-wizard [popTitle]="popTitle" [popText]="popText" (next)="popoverNext()" (skip)="popoverSkip()">
+  </app-help-wizard>
+</ng-template>

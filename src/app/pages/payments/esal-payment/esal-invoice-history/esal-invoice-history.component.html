@@ -1,0 +1,25 @@
+<arb-title
+  type="Page"
+  id="esal-invoice-history-title"
+  [showArrow]="true"
+  [title]="'payments.esal.invoice-history.title' | translate"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+
+<div class="row">
+  <arb-datatable
+    id="esal-invoice-history-table"
+    [columnId]="'invoiceNumber'"
+    [showSearch]="true"
+    [showFilter]="true"
+    [filterIsActive]="true"
+    [headers]="headers"
+    [data]="data"
+    [total]="total"
+    [exportFileName]="exportFileName"
+    [title]="'payments.esal.invoice-history.title'"
+    (onFilterClick)="onFilterClick()"
+    (externalPagination)="pagination($event)"
+  >
+  </arb-datatable>
+</div>

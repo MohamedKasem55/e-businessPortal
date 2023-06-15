@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col">
+    <arb-title
+      [id]="pageTitle.id"
+      [type]="pageTitle.type"
+      [title]="pageTitle.title"
+      [showArrow]="true"
+      (onButtonClick)="onButtonClick()"
+    >
+    </arb-title>
+  </div>
+  <div class="col-12">
+    <arb-tabs
+      id="cards-tabs"
+      [tabs]="feesTabs"
+      [value]="currentFeesTab"
+      (onChange)="feesTabChanged($event)"
+    >
+    </arb-tabs>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <arb-summary [sections]="[feesSummarySection]"></arb-summary>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <arb-datatable
+      [columnId]="''"
+      [id]="'processedTrxListID'"
+      [headers]="headers"
+      [data]="feesSelectedList"
+      [title]="currentFeesTab"
+      [hasCheckbox]="false"
+      [showSearch]="false"
+      [showFilter]="false"
+    >
+    </arb-datatable>
+  </div>
+</div>

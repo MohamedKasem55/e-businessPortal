@@ -1,0 +1,47 @@
+<arb-title
+  [id]="titleModel.id"
+  [showArrow]="titleModel.showArrow"
+  [type]="titleModel.type"
+  [endButtons]="titleModel.endButtons"
+  [title]="titleModel.title"
+  [subTitle]="titleModel.subTitle"
+  (onButtonClick)="onButtonClick($event)"
+></arb-title>
+<div class="mb-3">
+  <arb-tabs
+    [id]="'documents-tabs'"
+    [tabs]="tabs"
+    [value]="selectedTab"
+    (onChange)="onTabChange($event)"
+  ></arb-tabs>
+</div>
+<div class="mb-2 mb-2 col-6" *ngIf="showAccounts">
+  <arb-dropdown
+    [label]="'accounts.acc' | translate"
+    id="selectAccountsStatements"
+    [columnId]="'accountPk'"
+    [textField]="['alias', 'fullAccountNumber']"
+    [value]="selectedAccount"
+    [options]="accounts"
+    [endTextField]="'availableBalance'"
+    [endTextCurrencyField]="'currency'"
+    (onValueChanged)="selectAccount($event)"
+    class="pb-3"
+  ></arb-dropdown>
+</div>
+<div class="row">
+  <arb-datatable
+    id="documents-table"
+    [columnId]="    selectedTab === 'accStatement' ||    selectedTab === 'ibanCertificate' ||    selectedTab === 'bnkCertificate'
+    ? 'fileNetRef'      : (selectedTab==='requestedStatement')?'fileName':'path'  "
+    [showFilter]="dataTableFilter"
+    [showSearch]="true"
+    [headers]="tableHeaders"
+    [data]="data"
+    (onFilterClick)="onFilterClick()"
+    [paginationValue]="{ page: 1, size: 10 }"
+    (buttonClicked)="onDownloadClick($event)"
+    [title]="tableTitle"
+  >
+  </arb-datatable>
+</div>

@@ -1,0 +1,29 @@
+<div class="col-12">
+  <arb-title
+    type="Page"
+    id="feedbackFilesTitle"
+    [showArrow]="true"
+    [title]="'pos.e-commerce.list-of-terminals.details.title' | translate"
+    (onButtonClick)="onTitleButtonClick($event)"
+  ></arb-title>
+  <div class="row">
+    <arb-title
+      id="'table-title'"
+      [title]="
+        'pos.e-commerce.list-of-terminals.details.summary.title' | translate
+      "
+      type="Section"
+    >
+    </arb-title>
+  </div>
+  <div class="row pt-4">
+    <div class="col-12">
+      <arb-summary [sections]="[terminalSummarySection]"></arb-summary>
+    </div>
+  </div>
+</div>
+
+<arb-bottom-buttons
+  [endButtons]="[backButton]"
+  (onClick)="onTitleButtonClick()"
+></arb-bottom-buttons>

@@ -1,0 +1,21 @@
+<div class="d-flex flex-column h-100 w-100">
+
+  <arb-line-card-group
+    id="top-transfers"
+    [canShowNoData]="false"
+    [title]="topTransfersTitle"
+    [columnCount]="columnCount"
+    [lineCards]="transfersLineCards"
+    (onButtonClick)="onTransferClick($event)">
+  </arb-line-card-group>
+
+  <div class=" flex-grow-1 mb-2">
+    <arb-buttons-list
+      *ngIf="transfersLineCards && (transfersLineCards!.length < 4 || transfersLineCards!.length ==6)"
+      [title]="''"
+      [subTitle]="'dashboard-sections.add-transfers'"
+      [buttons]="goToTransfersBtn"
+      (onButtonClick)="onGoToTransfersClick()">
+    </arb-buttons-list>
+  </div>
+</div>

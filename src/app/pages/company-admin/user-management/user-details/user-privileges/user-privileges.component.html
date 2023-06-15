@@ -1,0 +1,41 @@
+<ng-container *ngIf="editMode === 'VIEW' && !prepareData">
+  <div class="row">
+    <div class="col">
+      <arb-datatable
+        [id]="'accountsListID'"
+        [headers]="privilegeTableHeaders"
+        [data]="privilegeTableData"
+        [isDisabled]="true"
+        [paginationValue]="{ page: 1, size: 5 }"
+        [pageSizes]="[5, 10, 20, 50, 100]"
+        [columnId]="'id'"
+        [title]="privilegeTitle.title"
+      >
+      </arb-datatable>
+    </div>
+  </div>
+  <br>
+  <ng-container
+    *ngIf="
+      userDetails &&
+      userDetails?.userEtradeFunctions &&
+      userDetails?.userEtradeFunctions.length > 0
+    "
+  >
+    <div class="row">
+      <div class="col">
+        <arb-datatable
+          [id]="'accountsListID'"
+          [headers]="eTradeTableHeaders"
+          [data]="eTradeTableData"
+          [isDisabled]="true"
+          [paginationValue]="{ page: 1, size: 5 }"
+          [pageSizes]="[5, 10, 20, 50, 100]"
+          [columnId]="'id'"
+          [title]="eTradeTitle.title"
+        >
+        </arb-datatable>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

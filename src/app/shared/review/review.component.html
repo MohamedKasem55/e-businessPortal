@@ -1,0 +1,13 @@
+<ng-container *ngIf="chosenBank.id , then success; else failure "></ng-container>
+<ng-template #success>
+    <app-form [forms]="reviewControls[0]"></app-form>
+    <arb-accordion [list]="list"></arb-accordion>
+    <app-form [forms]="reviewControls[1]"></app-form>
+    <arb-bottom-buttons [id]="'featureDetails'" [endButtons]="endButtons" [startButtons]="startButtons"
+        (onClick)="btnClickHandler($event)"></arb-bottom-buttons>
+</ng-template>
+
+
+<ng-template #failure>
+    <p> something went wrong </p>
+</ng-template>

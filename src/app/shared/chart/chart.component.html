@@ -1,0 +1,23 @@
+<arb-card
+  id="chart"
+  class="col"
+  *ngIf="showChart"
+  [shadowAndBgClasses]="bgClass">
+  <ng-content *ngIf="showHeader"></ng-content>
+  <div
+    class="chart-canvas-amount"
+    *ngIf="ammoutOptions && ammoutOptions!.showAmount">
+    <arb-amount
+      size="md"
+      [amount]="ammoutOptions!.amount"
+      [currency]="ammoutOptions!.currency">
+    </arb-amount>
+  </div>
+  <div class="d-block h-100">
+    <canvas baseChart [data]="chartData" [options]="chartOptions" [style.width.px]="width"
+            [style.height.px]="height"></canvas>
+  </div>
+</arb-card>
+<div class="chart-skeleton">
+  <arb-chart-skeleton *ngIf="!showChart"></arb-chart-skeleton>
+</div>

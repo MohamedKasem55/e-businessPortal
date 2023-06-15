@@ -1,0 +1,14 @@
+<arb-datatable
+  id="pending-actions-table"
+  [data]="data"
+  [headers]="headers"
+  [columnId]="'id'"
+  [hasCheckbox]="false"
+  [showSearch]="true"
+  [showFilter]="false"
+  [pageSizes]="[10, 20]"
+  [exportFileName]="exportFileName"
+  (buttonClicked)="onButtonClick($event)"
+  [title]="'pending-actions.pending-actions'"
+>
+</arb-datatable>

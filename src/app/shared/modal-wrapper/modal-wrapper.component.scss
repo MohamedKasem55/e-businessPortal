@@ -1,0 +1,5 @@
+.popupWrapper {
+  ::ng-deep button:focus-visible {
+    outline: 0;
+  }
+}

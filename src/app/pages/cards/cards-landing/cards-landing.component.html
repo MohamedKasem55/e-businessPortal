@@ -1,0 +1,120 @@
+<div class="col-12">
+  <div class="row">
+    <arb-title
+      [id]="title.id"
+      [type]="title.type"
+      [title]="title.title"
+      [endButtons]="title.endButtons"
+      (onButtonClick)="onTitleActionsClick($event)"
+    >
+    </arb-title>
+  </div>
+  <div class="col-12 m-auto mb-5">
+    <div class="row">
+      <div class="col-12">
+        <arb-tabs
+          id="cards-tabs"
+          [tabs]="tabs"
+          [value]="currentActiveTab"
+          (onChange)="tabChanged($event)"
+        ></arb-tabs>
+      </div>
+    </div>
+  </div>
+<!--  <div class="row">-->
+<!--    <arb-title-->
+<!--      [id]="'toggleViewLine'"-->
+<!--      [title]="'cards.all-cards' | translate"-->
+<!--      type="Section"-->
+<!--    >-->
+<!--    </arb-title>-->
+<!--  </div>-->
+  <ng-container *ngIf="!isListView">
+    <div class="row">
+      <arb-table-controls
+        *ngIf="lineCards?.length"
+        [id]="'credit-cards-filter'"
+        [showSearch]="true"
+        (onFilterClick)="onFilterCardsClick($event)"
+        (onSearchDataChanged)="onSearchCards($event)"
+      >
+      </arb-table-controls>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 mb-2">
+        <arb-line-card-group [id]="'cards'" [lineCards]="lineCardsSearchResult" [columnCount]="3"
+                             (onButtonClick)="onCardClick($event)"></arb-line-card-group>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isListView">
+    <div class="col-12" *ngIf="cardsTypes.OWNER === currentActiveTab">
+      <arb-datatable
+        id="credit-cardslisting"
+        (buttonClicked)="onTabelButtonClick($event)"
+        [showSearch]="true"
+        [headers]="cardsListHeader"
+        [data]="ownerCardsList"
+        [paginationValue]="{ page: 1, size: 50 }"
+        [total]="total"
+        [hasCheckbox]="false"
+        [maxDisplayRow]="5"
+        [columnId]="'number'"
+        [title]="'cards.all-cards'"
+        (externalPagination)="pagination($event)"
+      >
+      </arb-datatable>
+    </div>
+    <div class="col-12" *ngIf="cardsTypes.PREPAID === currentActiveTab">
+      <arb-datatable
+        id="prepaid-cardslisting"
+        (buttonClicked)="onTabelButtonClick($event)"
+        [showSearch]="true"
+        [headers]="cardsListHeader"
+        [data]="prepaidCardsList"
+        [paginationValue]="{ page: 1, size: 50 }"
+        [total]="total"
+        [hasCheckbox]="false"
+        [maxDisplayRow]="5"
+        [columnId]="'number'"
+        [title]="'cards.all-cards'"
+        (externalPagination)="pagination($event)"
+      >
+      </arb-datatable>
+    </div>
+    <div class="col-12" *ngIf="cardsTypes.BUSINESS === currentActiveTab">
+      <arb-datatable
+        id="business-cardslisting"
+        (buttonClicked)="onTabelButtonClick($event)"
+        [showSearch]="true"
+        [headers]="cardsListHeader"
+        [data]="businessCardsList"
+        [paginationValue]="{ page: 1, size: 50 }"
+        [total]="total"
+        [hasCheckbox]="false"
+        [maxDisplayRow]="5"
+        [columnId]="'number'"
+        [title]="'cards.all-cards'"
+        (externalPagination)="pagination($event)"
+      >
+      </arb-datatable>
+    </div>
+    <div class="col-12" *ngIf="cardsTypes.DEBIT === currentActiveTab">
+      <arb-datatable
+        id="business-cardslisting"
+        (buttonClicked)="onTabelButtonClick($event)"
+        [showSearch]="true"
+        [headers]="cardsListHeader"
+        [data]="debitCardsList"
+        [paginationValue]="{ page: 1, size: 50 }"
+        [total]="total"
+        [hasCheckbox]="false"
+        [maxDisplayRow]="5"
+        [columnId]="'number'"
+        [title]="'cards.all-cards'"
+        (externalPagination)="pagination($event)"
+      >
+      </arb-datatable>
+    </div>
+  </ng-container>
+</div>

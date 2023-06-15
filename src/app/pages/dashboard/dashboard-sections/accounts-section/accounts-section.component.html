@@ -1,0 +1,20 @@
+<div class="d-flex flex-column h-100 w-100">
+
+  <arb-line-card-group
+    id="accountsGroup"
+    [title]="accountTitle"
+    [columnCount]="1"
+    (onButtonClick)="onAccountSelect($event)"
+    [lineCards]="accountLineCards">
+  </arb-line-card-group>
+
+  <div class=" flex-grow-1 mb-2">
+    <arb-buttons-list
+      *ngIf="accountLineCards && accountLineCards!.length < 4"
+      [title]="''"
+      [subTitle]="'dashboard-sections.add-accounts'"
+      [buttons]="openMoreAccountsBtn"
+      (onButtonClick)="onOpenAccountBtnClick()">
+    </arb-buttons-list>
+  </div>
+</div>

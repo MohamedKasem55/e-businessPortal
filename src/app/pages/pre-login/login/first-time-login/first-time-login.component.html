@@ -1,0 +1,51 @@
+<section class="arb-login d-flex py-5">
+  <div class="container">
+    <div class="col-12">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8 m-auto">
+          <div class="p-12">
+            <arb-title
+              id="ft-login-title"
+              [title]="'login.welcome-alrajhi' | translate"
+              type="Page"
+            ></arb-title>
+            <div class="row">
+              <div class="col-12">
+                <arb-title
+                  id="ft-reset-psd-login-title"
+                  [title]="'login.reset-psd' | translate"
+                  [stepper]="stepper"
+                  type="Section"
+                ></arb-title>
+              </div>
+            </div>
+
+            <br />
+            <div class="d-flex gap-2" *ngIf="stepper.stepCounter === 2">
+              <span class="m-1 arb-icon-exclamationBorder f-l-icon"></span>
+              <p>
+                {{ "login.first-time-login-p" | translate }}
+              </p>
+            </div>
+            <app-form
+              *ngIf="stepper.stepCounter === 1"
+              [forms]="resetPasswordForm"
+              (onResultChanged)="onResultChange($event)"
+            ></app-form>
+            <app-form
+              *ngIf="stepper.stepCounter === 2"
+              [forms]="securityQuestionsForm"
+              (onResultChanged)="onResultChange($event)"
+            ></app-form>
+
+            <arb-bottom-buttons
+              [startButtons]="startButtons"
+              [endButtons]="endButtons"
+              (onClick)="click($event)"
+            ></arb-bottom-buttons>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

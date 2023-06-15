@@ -1,0 +1,16 @@
+<app-transaction-follow (onButtonClick)="onButtonClick($event)"
+                        (onResultChanged)="onResultChanged($event)"
+                        *ngIf="hasAccess"
+                        [alert]="alert"
+                        [endButtons]="endButtons"
+                        [pageTitle]="pageTitle"
+                        [pages]="pages"
+                        [result]="result"
+                        [startButtons]="startButtons"
+                        [summary]="summary"
+>
+</app-transaction-follow>
+
+<div *ngIf="!hasAccess">
+  <app-result [result]="result"></app-result>
+</div>

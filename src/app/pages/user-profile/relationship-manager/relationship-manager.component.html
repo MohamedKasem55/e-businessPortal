@@ -1,0 +1,16 @@
+<arb-title
+  id="relationshipDetails"
+  (onButtonClick)="onArrowClicked()"
+  [showArrow]="true"
+  [title]="title"
+></arb-title>
+
+<arb-summary *ngIf="!isEmptyDetails" [sections]="[section]"></arb-summary>
+
+<div *ngIf="isEmptyDetails">
+  <arb-procedure-status
+    [type]="'Warning'"
+    [title]="'preferences.noRelationshipManagerMessage' | translate"
+    [subTitle]="'preferences.contactUsMessage' | translate"
+  ></arb-procedure-status>
+</div>

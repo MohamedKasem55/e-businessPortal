@@ -1,0 +1,31 @@
+<arb-title
+  type="Page"
+  id="analyticsTitle"
+  [showArrow]="true"
+  [title]="'pos.dashboard.analytics.title' | translate"
+  (onButtonClick)="onTitleButtonsClick($event)"
+></arb-title>
+<div class="row mt-3 mb-0">
+  <arb-tabs
+    id="feedbackFilesTabs"
+    [tabs]="tabs"
+    [value]="type"
+    (onChange)="tabChanged($event)"
+  ></arb-tabs>
+</div>
+<div class="row p-3">
+  <arb-datatable
+    id="analytics-table"
+    [columnId]="''"
+    [showSearch]="true"
+    [showFilter]="true"
+    [headers]="headers"
+    [data]="data"
+    [exportFileName]="exportFileName"
+    [title]="type"
+    (externalPagination)="externalPagination($event)"
+    (buttonClicked)="onFileClicked($event)"
+    (onFilterClick)="onFilterClick()"
+  >
+  </arb-datatable>
+</div>

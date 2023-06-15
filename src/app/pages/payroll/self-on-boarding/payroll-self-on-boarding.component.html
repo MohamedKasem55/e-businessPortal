@@ -1,0 +1,19 @@
+<app-self-on-boarding-landing
+  *ngIf="showLanding"
+  [title]="landingTitle"
+  [lineCards]="lineCards"
+  (onButtonClick)="onButtonClick($event)"
+>
+</app-self-on-boarding-landing>
+<app-transaction-follow
+  *ngIf="!showLanding"
+  [pages]="pages"
+  [pageTitle]="pageTitle"
+  [startButtons]="startButtons"
+  [endButtons]="endButtons"
+  [summary]="summary"
+  [result]="result"
+  (onButtonClick)="onButtonClick($event)"
+  (onResultChanged)="onResultChanged($event, endButtons)"
+>
+</app-transaction-follow>

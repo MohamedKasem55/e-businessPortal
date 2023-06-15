@@ -1,0 +1,15 @@
+<arb-title
+  [id]="title.id"
+  [type]="title.type"
+  [title]="title.title"
+  [endButtons]="title.endButtons"
+  [showArrow]="false"
+>
+</arb-title>
+<arb-box-list
+  id="help-box-list"
+  [box]="boxes"
+  [columnCount]="3"
+  (onClick)="onBoxClick($event)"
+  action="onHover"
+></arb-box-list>

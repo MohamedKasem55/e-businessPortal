@@ -1,0 +1,45 @@
+<arb-title
+  type="Page"
+  id="goldWalletTitle"
+  [showArrow]="true"
+  [title]="'gold-wallet.title' | translate"
+  (onButtonClick)="onTitleButtonClick($event)"
+  [endButtons]="endButtons"
+></arb-title>
+<arb-gold-wallet *ngIf="walletDashboard"
+  id="gold"
+  [title]="'gold-wallet.goldBalance'| translate"
+  [balance]="walletDashboard.goldBalance.balance.toString()"
+  [balanceCurrency]="walletDashboard.goldBalance.measureUnit"
+  [note]="walletDashboard.marketInformation.marketOpened?('gold-wallet.marketInfo'| translate):('gold-wallet.marketInfo'| translate)+' '+('gold-wallet.marketClosed'| translate)"
+  [prices]="prices"
+  [pill]="pill"
+></arb-gold-wallet>
+<arb-title
+  id="transactions"
+  [title]="'gold-wallet.dashboard.transactions' | translate"
+  [endButtons]="buttonList"
+  (onButtonClick)="titleButton($event)"
+></arb-title>
+<arb-tabs
+  id="goldDashboardTabs"
+  [tabs]="tabs"
+  [value]="type"
+  (onChange)="tabChanged($event)"
+></arb-tabs>
+<arb-datatable
+  id="gold-dashboard-table"
+  [showSearch]="true"
+  [showFilter]="false"
+  [headers]="headers"
+  [data]="data"
+  [columnId]="'batchPk'"
+  [paginationValue]="{ page: 1, size: 50 }"
+  [total]="total"
+  [visibleRangeLength]="5"
+  [pageSizes]="[10, 20, 50, 100]"
+  [title]="type==='my-gold'?'gold-wallet.dashboard.myGold':'gold-wallet.dashboard.transactions'"
+  (externalPagination)="externalPagination($event)"
+  (buttonClicked)="onButtonClick($event)"
+>
+</arb-datatable>

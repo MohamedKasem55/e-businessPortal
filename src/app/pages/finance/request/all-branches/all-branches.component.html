@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col">
+    <arb-title
+      [id]="pageTitle.id"
+      [showArrow]="true"
+      [title]="pageTitle.title"
+      [type]="pageTitle.type">
+    </arb-title>
+    <arb-title
+      [endButtons]="sectionTitle.endButtons"
+      [id]="sectionTitle.id"
+      [title]="sectionTitle.title"
+      [type]="sectionTitle.type">
+    </arb-title>
+  </div>
+</div>
+
+<div class="col-12">
+  <arb-datatable
+    [columnId]="'batchPk'"
+    [data]="branches"
+    [filterIsActive]="false"
+    [hasCheckbox]="false"
+    [headers]="headers"
+    [maxDisplayRow]="10"
+    [paginationValue]="{page:1,size:10}"
+    [showFilter]="false"
+    [showSearch]="true"
+    id="branches-table"
+  >
+  </arb-datatable>
+</div>

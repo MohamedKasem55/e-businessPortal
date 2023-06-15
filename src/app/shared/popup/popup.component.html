@@ -1,0 +1,37 @@
+<ng-template #popupModal let-modal>
+  <app-modal-wrapper>
+    <div class="modal-header d-flex justify-content-center" *ngIf="title">
+      <p class="flex-grow-1 color-arb-primaryText font-h1-bold text-center">
+        {{ title | translate }}
+        <arb-button
+          class="float-end"
+          type="outLine"
+          [id]="'close'"
+          prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+          (onClick)="onDismiss()"
+        >
+        </arb-button>
+      </p>
+    </div>
+
+    <arb-alert
+      *ngIf="showAlert && alert"
+      [id]="alert.id"
+      [title]="alert.title || ''"
+      [type]="alert.type"
+      [message]="alert.message"
+      [showClose]="alert.showClose"
+      [action]="alert.action"
+    ></arb-alert>
+
+    <div class="modal-title">
+      <img *ngIf="image" class="img-fluid" [src]="image" />
+    </div>
+    <div class="modal-body" *ngIf="form">
+      <app-form
+        [form]="form"
+        (onButtonClick)="doPopupButtonClick($event)"
+      ></app-form>
+    </div>
+  </app-modal-wrapper>
+</ng-template>

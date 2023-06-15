@@ -1,0 +1,189 @@
+@import "./assets/scss/colors";
+@import "./assets/scss/images";
+@import "node_modules/arb-design-library/src/assets/scss/main";
+
+
+.mainScroll{
+  &::-webkit-scrollbar-track {
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+  }
+  &::-moz-range-track{
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.qrCodeImage{
+  width: 8rem;
+  background-image: $qr-code-image;
+  height: 8rem;
+  border-style:none;
+  background-size: cover;
+}
+
+.showFullScreen{
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1030;
+  padding: 3rem;
+  overflow-y: auto;
+  @extend .bg-arb-primaryBG;
+}
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  font-family: $font-family-arb-fe, $font-family-arb-fa;
+  @extend .bg-arb-secondaryCard;
+  // hamburger navebar
+  .ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 50px;
+    margin: auto;
+  }
+
+  .popover{
+    --bs-popover-bg:$arb-secondaryCard;
+  }
+
+  .hamRotate.active {
+    transform: rotate(45deg);
+  }
+
+  .hamRotate180.active {
+    transform: rotate(180deg);
+  }
+
+  .line {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: $arb-primaryLogo;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+  }
+
+  .ham8 {
+    .top {
+      stroke-dasharray: 40 160;
+    }
+
+    .middle {
+      stroke-dasharray: 40 142;
+      transform-origin: 50%;
+      transition: transform 400ms;
+    }
+
+    .bottom {
+      stroke-dasharray: 40 85;
+      transform-origin: 50%;
+      transition: transform 400ms, stroke-dashoffset 400ms;
+    }
+  }
+
+  .ham8.active {
+    .top {
+      stroke-dashoffset: -64px;
+    }
+
+    .middle {
+      //stroke-dashoffset: -20px;
+      transform: rotate(90deg);
+    }
+
+    .bottom {
+      stroke-dashoffset: -64px;
+    }
+  }
+
+  // end hamburger navebar
+
+
+  video {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.modal-dialog {
+  max-width: 47rem;
+}
+
+
+[dir="rtl"] {
+
+  .text-start {
+    text-align: right !important;
+  }
+
+  body {
+    direction: rtl;
+    text-align: right;
+
+    .ms-sm-auto {
+      margin-right: auto !important;
+      margin-left: 0 !important;
+    }
+
+    .arb-login {
+      .container {
+        .col-12 {
+          .row {
+            .arb-bg-device {
+              background-position: 16rem 0rem !important;
+
+              .arb-qr {
+                left: 0;
+                right: unset !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .sidebar {
+      right: 0;
+      left: auto;
+    }
+
+    .navbar-brand {
+      box-shadow: $box-shadow-sidebar-ar;
+    }
+  }
+}
+
+#searchPopover {
+  .search-list {
+    .dropdown-menu.show {
+      display: block;
+      max-height: 45vh;
+      overflow: scroll;
+    }
+  }
+}
+
+.display-none{
+  display: none;
+}
+.display-block{
+  display: block;
+}
+

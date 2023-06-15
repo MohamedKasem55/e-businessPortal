@@ -1,0 +1,166 @@
+<arb-title
+  id="accounts-title-id"
+  [showArrow]="false"
+  [title]="'accounts.bfm-title'|translate"
+  (onButtonClick)="onTitleButtonsClick($event)"></arb-title>
+  <ng-container *ngIf="getLinkedAccounts(), then ManageBanks; else ConnectToBanks ">
+  </ng-container>
+  <ng-template #ManageBanks>
+    <div class="row">
+      <arb-title
+        [id]="manageTitle.id"
+        [type]="manageTitle.type"
+        [title]="manageTitle.title"
+        [endButtons]="manageTitle.endButtons"
+        (onButtonClick)="manageButtonClick()"
+      >
+      </arb-title>
+    </div>
+    <div class="row">
+    <div class="col-6 py-2">
+      <arb-dropdown [id]="'1'" [label]="'Select Bank'" [options]="BanksList" 
+                    [textField]="['description']"  [columnId]="'description'"
+                    formControlName="select1"></arb-dropdown>
+  </div>
+  <div class="col-6 py-2">
+    <arb-dropdown [id]="'1'" [label]="'Select Account'" [options]="AccountsList" 
+                  [textField]="['description']"  [columnId]="'description'"
+                  formControlName="select1"></arb-dropdown>
+</div>
+</div>
+    <div class="col-12">
+      <arb-dividers size="h2"></arb-dividers>
+  </div>
+  </ng-template>
+
+  <ng-template #ConnectToBanks>
+    <div class="row">
+      <arb-title
+        [id]="connectTitle.id"
+        [type]="connectTitle.type"
+        [title]="connectTitle.title"
+        [subTitle]="connectTitle.subTitle"
+        [endButtons]="connectTitle.endButtons"
+        (onButtonClick)="makeConnectionHandler($event)"
+      >
+      </arb-title>
+    </div>
+    <div class="col-12">
+      <arb-dividers size="h2"></arb-dividers>
+  </div>
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <app-form [forms]="selectAccountControl"></app-form>
+        </div>
+      </div>
+    </div>
+
+  </ng-template >
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
+  <div class="col pb-2">
+    <arb-cash-flow-card
+      [title]="'accounts.monthly-cashflow' | translate"
+      [subTitle]="'accounts.actual-cashflow' | translate"
+      [amount]="totalCashFlow"
+      [button]="periodsTypeList"
+      (onButtonClick)="onSelectOption($event)">
+    </arb-cash-flow-card>
+  </div>
+  <div class="col pb-2">
+    <arb-cash-flow-card
+      [title]="'accounts.inflow' | translate"
+      [subTitle]="'accounts.actual-inflow' | translate"
+      [amount]="actualIncome"
+      [subTitleEnd]="'accounts.expected-inflow' | translate"
+      [amountEnd]="expectedIncome"
+      [button]="showIncomeDetailsBtn"
+      (onButtonClick)="onInflowDetailsClick($event)">
+    </arb-cash-flow-card>
+  </div>
+  <div class="col pb-2">
+    <arb-cash-flow-card
+      [title]="'accounts.outflow' | translate"
+      [subTitle]="'accounts.actual-outflow' | translate"
+      [amount]="actualExpenses"
+      [subTitleEnd]="'accounts.expected-outflow' | translate"
+      [amountEnd]="expectedExpenses"
+      [button]="showOutcomeDetailsBtn"
+      (onButtonClick)="onInflowDetailsClick($event)">
+    </arb-cash-flow-card>
+  </div>
+</div>
+<div *ngIf="showCashFlowSection">
+<div class="row mt-4">
+  <arb-title
+    [id]="'charts-title'"
+    [title]="chartPageTitle | translate"
+    [showArrow]="showArrow"
+    (onButtonClick)="onTitleButtonClick($event)"
+    type="Section">
+  </arb-title>
+</div>
+<div class="row" *ngIf="!showTryAgain && showCashFlowChart">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pb-2">
+    <app-chart
+      [chartData]="cashFlowChartData"
+      [chartOptions]="chartOptions"
+      [showChart]="showCashFlowChart"
+      [showHeader]="true">
+    </app-chart>
+  </div>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pb-2">
+    <app-chart
+      [chartData]="balanceChartData"
+      [chartOptions]="chartOptions"
+      [showChart]="showBalanceChart"
+      [showHeader]="true">
+    </app-chart>
+  </div>
+</div>
+</div>
+<div class="row" *ngIf="showTryAgain">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pb-2">
+    <arb-line-card-group id="try-again" [lineCards]="tryAgainBar" (onButtonClick)="onTryAgainClick($event)">
+    </arb-line-card-group>
+  </div>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pb-2">
+    <arb-line-card-group id="try-again-1" [lineCards]="tryAgainDougnet" (onButtonClick)="onTryAgainClick($event)">
+    </arb-line-card-group>
+  </div>
+</div>
+
+<div class="row" *ngIf="!showTryAgain && !showCashFlowChart">
+  <div [ngClass]="'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 g-2 pb-2'" >
+    <app-chart
+      [chartData]="inOutflowDoughnutChartData"
+      [chartOptions]="inOutflowDoughnutChartOptions"
+      [showHeader]="true"
+      [showChart]="showInflowChart"
+      [ammoutOptions]="chartAmmoutOptions">
+    </app-chart>
+  </div>
+
+  <div [ngClass]="'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 g-2 pb-2'" >
+    <app-chart
+      [chartData]="inOutflowBarChartData"
+      [chartOptions]="inOutflowBarChartDrillDownOptions"
+      [showHeader]="true"
+      [showChart]="showInflowChart">
+    </app-chart>
+  </div>
+  <div [ngClass]="'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 g-2 pb-2'" *ngIf="showLocationGrah">
+    <arb-title
+    [id]="'charts-title'"
+    [title]="'public.pos-flow' | translate"
+    type="Section">
+  </arb-title>
+    <app-chart
+      [chartData]="locationDoughnutChartData"
+      [chartOptions]="inOutflowDoughnutChartOptions"
+      [showHeader]="true"
+      [showChart]="showLocationGrah"
+      [ammoutOptions]="locationChartAmmoutOptions">
+    </app-chart>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<arb-title type="Page" id="sms-report" [showArrow]="true"
+           [title]="'company-admin.alert-management.sms-report'|translate" (onButtonClick)="onTitleButtonClick($event)">
+</arb-title>
+<arb-summary [sections]="[summarySection]"></arb-summary>
+<ng-container>
+  <arb-datatable id="user-approval-table" [columnId]="'userPk'" [showSearch]="true" [hasCheckbox]="false"
+                 [isDisabled]="true" [showFilter]="true" [headers]="headers" [data]="data"
+                 [paginationValue]="paginationValue" [pageSizes]=" [10, 20, 50, 100]" [exportFileName]="exportFileName"
+                 (externalPagination)="externalPagination($event)" (onFilterClick)="openSearch()"
+                 [filterIsActive]="filterIsActive"
+                 [title]="'company-admin.alert-management.sms-report'">
+  </arb-datatable>
+</ng-container>
+<arb-dividers></arb-dividers>
+<div class="row">
+  <arb-bottom-buttons [startButtons]="[startButton]" (onClick)="onButtomEndButtonClicked()">
+  </arb-bottom-buttons>
+</div>

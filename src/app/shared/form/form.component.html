@@ -1,0 +1,422 @@
+<ngb-accordion #ngbAccordion>
+
+  <ng-container *ngFor="let form of formsGroup; let index=index;">
+
+    <ngb-panel [id]="form.id+'-panel'">
+
+      <ng-template ngbPanelHeader>
+        <arb-title *ngIf="form.accordionTitle" (onButtonClick)="accordionToggle(form.id )"
+                   [id]="'titleAccordion'" [type]="'Section'"
+                   [title]="form.accordionTitle.title || ''"
+                   [subTitle]="form.accordionTitle.subTitle || ''"
+                   [endButtons]="form.accordionTitle.endButtons">
+        </arb-title>
+        <arb-dividers *ngIf="!isExpanded(form.id)"></arb-dividers>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <form autocomplete="off" [id]="form.id" [formGroup]="form.formGroup" (keydown.enter)="submit(form.id)">
+          <div class="col-12">
+
+            <div class="row font-body-regular color-arb-primaryText">
+
+              <ng-container *ngFor="let item of form.sortedControls ">
+
+                <ng-container [ngSwitch]="item[1].controlType">
+
+                  <div *ngIf="!item[1].hidden" class="
+                    col-{{getSmColumnCount(item[1].columnCount, item[1].staticColumnCount)}}
+                    col-sm-{{getSmColumnCount(item[1].columnCount, item[1].staticColumnCount)}}
+                    col-md-{{getMdColumnCount(item[1].columnCount, item[1].staticColumnCount)}}
+                    col-lg-{{getLgColumnCount(item[1].columnCount)}}
+                    d-{{item[1].controlType== controlType.EMPTY ? 'none':'block' }}
+                    d-sm-{{item[1].controlType== controlType.EMPTY ? 'none':'block' }}
+                    d-md-{{item[1].controlType== controlType.EMPTY ? 'none':'block' }}
+                    d-lg-block
+                    mb-2" [ngClass]="item[1].class||''">
+                    <div class="row">
+
+
+                      <div *ngSwitchCase="controlType.TEXT">
+                        <div class="d-flex gap-2" [ngClass]="item[1].class||''">
+                          <span class="fs-4" *ngIf="item[1].controlOptions?.prefixIcon"
+                                [ngClass]="item[1].controlOptions.prefixIcon"></span>
+                          <span class="my-auto">
+                            {{item[1].label | translate}}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div *ngSwitchCase="controlType.SUMMARY_ITEM" class="d-flex my-3">
+                        <div class="flex-column" [id]="item[0]">
+                        <span
+                          class="d-flex font-footnote-regular color-arb-secondaryText"> {{item[1].label | translate}} </span>
+                          <span *ngIf="!item[1].controlOptions?.currency" (click)=" item[1].controlOptions?.isLink ? doButtonClick(item[0],index) :''"
+                                class="d-flex font-body-semi-bold "
+                                [ngClass]="item[1].controlOptions?.isLink ? 'color-arb-primaryColor arb-pointer ':'color-arb-primaryText' "> {{item[1].value | translate}} </span>
+                          <arb-amount class="d-flex" *ngIf="item[1].controlOptions?.currency" [amount]="item[1].value"
+                                      [currency]="item[1].controlOptions?.currency || ''"></arb-amount>
+                        </div>
+                      </div>
+                      <div *ngSwitchCase="controlType.PIN_INPUT" class="d-flex flex-wrap">
+                        <div class="col-12 col-md-6 col-lg-4 flex-grow-1  mt-auto mb-5">
+                      <span
+                        class="font-body-semi-bold color-arb-primaryText"> {{item[1].label | translate}} </span>
+                        </div>
+                        <div class="flex-fill">
+                          <arb-otp [formControlName]="item[0]" [id]="item[0]"
+                                   class="align-items-start font-body-semi-bold color-arb-primaryText" type="PIN"
+                                   [invalidForm]=false
+                                   validationText="">
+                          </arb-otp>
+                        </div>
+                      </div>
+
+                      <arb-title *ngSwitchCase="controlType.TITLE" (onButtonClick)="doButtonClick($event,index )"
+                                 [id]="item[0]" [type]="item[1].controlOptions.type || 'Section'"
+                                 [title]="item[1].controlOptions.title | translate"
+                                 [showArrow]="item[1].controlOptions.showArrow"
+                                 [subTitle]="item[1].controlOptions.subTitle" [amount]="item[1].controlOptions.amount"
+                                 [currency]="item[1].controlOptions.currency"
+                                 [startButtons]="item[1].controlOptions.startButtons"
+                                 [endButtons]="item[1].controlOptions.endButtons" [chips]="item[1].controlOptions.chips"
+                                 [stepper]="item[1].controlOptions.stepper">
+
+                      </arb-title>
+
+                      <arb-selection-group *ngSwitchCase="controlType.SELECTION_GROUP"
+                                           [formControlName]="item[0]"
+                                           [id]="item[0]"
+                                           [items]="item[1].controlOptions.items"
+                                           [title]="item[1].controlOptions.title"
+                                           [isDisabled]="item[1].controlOptions.isDisabled"
+                                           [textOnStart]="item[1].controlOptions.textOnStart">
+                      </arb-selection-group>
+
+                      <arb-procedure-status *ngSwitchCase="controlType.PROCEDURE_STATUS"
+                                            [formControlName]="item[0]"
+                                            [id]="item[0]"
+                                            [title]="item[1].controlOptions.title"
+                                            [subTitle]="item[1].controlOptions.subTitle|| ''"
+                                            [type]="item[1].controlOptions.type">
+                      </arb-procedure-status>
+
+
+                      <img *ngSwitchCase="controlType.IMAGE" [id]="item[0]" [src]="item[1].controlOptions.src"
+                           [ngClass]="item[1].controlOptions.class">
+
+                      <arb-generic-feature-listing *ngSwitchCase="controlType.GENERIC_FEATURE_LIST" [id]="item[0]"
+                                                   [cardImg]="item[1].controlOptions.cardImg"
+                                                   [title]="item[1].controlOptions.title"
+                                                   [cardTitle]="item[1].controlOptions.cardTitle"
+                                                   [featureTitle]="item[1].controlOptions.featureTitle"
+                                                   [amounts]="item[1].controlOptions.amounts"
+                                                   [description]="item[1].controlOptions.description"
+                                                   [showBorder]="item[1].controlOptions.showBorder"
+                                                   [features]="item[1].controlOptions.features"
+                                                   [submitButton]="item[1].controlOptions.submitButton"
+                                                   (onButtonClick)="doButtonClick($event,index )"
+                      ></arb-generic-feature-listing>
+
+                      <arb-pill class="mb-2" *ngSwitchCase="controlType.PILL"
+                                [text]="item[1].controlOptions.text | translate"
+                                [type]="item[1].controlOptions.type || 'Neutral'" [id]="item[0]"></arb-pill>
+
+                      <arb-input *ngSwitchCase="controlType.TEXT_INPUT" [label]="item[1].label | translate"
+                                 [formControlName]="item[0]" [id]="item[0]" inputType="text"></arb-input>
+
+                      <arb-number-input *ngSwitchCase="controlType.NUMBER_INPUT" [label]="item[1].label | translate"
+                                        [formControlName]="item[0]" [id]="item[0]"
+                                        [maxlength]="item[1].controlOptions?.maxlength"></arb-number-input>
+
+                      <arb-password *ngSwitchCase="controlType.PASSWORD" [label]="item[1].label | translate"
+                                    [formControlName]="item[0]" [id]="item[0]"></arb-password>
+
+                      <arb-amount-input *ngSwitchCase="controlType.AMOUNT" [label]="item[1].label | translate"
+                                        [formControlName]="item[0]" [id]="item[0]"
+                                        [currency]="item[1].controlOptions?.currency || '608'"></arb-amount-input>
+
+                      <arb-input *ngSwitchCase="controlType.PHONE" [label]="item[1].label | translate"
+                                 [formControlName]="item[0]" [phonePrefix]="item[1].controlOptions?.phonePrefix"
+                                 [id]="item[0]"
+                                 inputType="phone"></arb-input>
+
+                      <arb-date-gregorian-hijri *ngSwitchCase="controlType.DATE" [formControlName]="item[0]"
+                                                [id]="item[0]"
+                                                [label]="item[1].label | translate"
+                                                [showCalendersType]="item[1].controlOptions?.showCalendersType"
+                                                [type]="item[1].controlOptions?.type || calenderType.GREGORIAN"
+                                                [displayPattern]="item[1].controlOptions?.displayPattern || 'dd/MM/yyyy'"
+                                                [selectTodayText]="item[1].controlOptions?.selectTodayText || 'public.select-today'"
+                                                [applyText]="item[1].controlOptions?.applyText || 'public.apply'"
+                                                [maxDate]="item[1].controlOptions?.maxDate"
+                                                [minDate]="item[1].controlOptions?.minDate"
+                                                [disableSelectToday]="item[1].controlOptions?.disableSelectToday"
+                      ></arb-date-gregorian-hijri>
+
+                      <arb-input *ngSwitchCase="controlType.SINGLE_DIGIT" [label]="item[1].label | translate"
+                                 [formControlName]="item[0]" [id]="item[0]" inputType="singleDigit"></arb-input>
+
+                      <arb-input *ngSwitchCase="controlType.SINGLE_PASSWORD_DIGIT" [label]="item[1].label | translate"
+                                 [formControlName]="item[0]" [id]="item[0]" inputType="singlePasswordDigit"></arb-input>
+
+                      <arb-upload *ngSwitchCase="controlType.UPLOAD"
+                                  [acceptedTypes]="item[1].controlOptions.acceptedTypes"
+                                  [label]="item[1].label | translate"
+                                  [maxSizeKB]="item[1].controlOptions.maxSizeKB"
+                                  [formControlName]="item[0]" [id]="item[0]"></arb-upload>
+
+                      <arb-button *ngSwitchCase="controlType.BUTTON" [id]="item[1].controlOptions.id"
+                                  [type]="item[1].controlOptions.type" [text]="item[1].controlOptions.text | translate"
+                                  [prefixImg]="item[1].controlOptions.prefixImg"
+                                  [options]="item[1].controlOptions.options"
+                                  [suffixImg]="item[1].controlOptions.suffixImg"
+                                  [prefixIcon]="item[1].controlOptions.prefixIcon"
+                                  [suffixIcon]="item[1].controlOptions.suffixIcon"
+                                  [isDisable]="item[1].controlOptions.isDisable||false"
+                                  [showLoading]="item[1].controlOptions.showLoading || false"
+                                  (onClick)="doButtonClick(item[1].controlOptions.id,index)"></arb-button>
+
+                      <arb-selection *ngSwitchCase="controlType.SELECTION" [formControlName]="item[0]"
+                                     [id]="item[1].controlOptions.id" [title]="item[1].controlOptions.title"
+                                     [subTitle]="item[1].controlOptions.subTitle"
+                                     [textOnStart]="item[1].controlOptions.textOnStart"
+                                     (onLinkClick)="doButtonClick($event,index)"
+                                     [type]="item[1].controlOptions.type || 'checkbox'"></arb-selection>
+
+                      <arb-dropdown *ngSwitchCase="controlType.DROPDOWN " [id]="item[0]"
+                                    [label]="item[1].label | translate"
+                                    [isShowSelectAll]="item[1].controlOptions.showSelectAll"
+                                    [hasSearch]="item[1].controlOptions.hasSearch" [formControlName]="item[0]"
+                                    [columnId]="item[1].controlOptions.columnId"
+                                    [options]="item[1].controlOptions.options"
+                                    [textField]="item[1].controlOptions.textField"
+                                    [imageField]="item[1].controlOptions.imageField"
+                                    [iconField]="item[1].controlOptions.iconField"
+                                    [endTextField]="item[1].controlOptions.endTextField"
+                                    [endTextCurrencyField]="item[1].controlOptions.endTextCurrencyField"
+                                    [disabledField]="item[1].controlOptions.disabledField"
+                                    [isCheckboxList]="item[1].controlOptions.isCheckboxList"
+                                    [stickyObject]="item[1].controlOptions.stickyObject">
+                      </arb-dropdown>
+
+                      <app-pdf-viewer *ngSwitchCase="controlType.PDF_VIEWER " [id]="item[0]"
+                                      [formControlName]="item[0]"
+                                      [src]="item[1].controlOptions.src"
+                                      [originalSize]="item[1].controlOptions.originalSize || true"
+                                      [renderText]="item[1].controlOptions.renderText || true"
+                                      [rotation]="item[1].controlOptions.rotation || 0"
+                                      [showAll]="item[1].controlOptions.showAll || true"
+                                      [fitToPage]="item[1].controlOptions.fitToPage || true"
+                                      [zoom]="item[1].controlOptions.zoom || 1"
+                                      [stickToPage]="item[1].controlOptions.stickToPage || true"
+                                      [externalLinkTarget]="item[1].controlOptions.externalLinkTarget || 'blank'"
+                                      [autoresize]="item[1].controlOptions.autoresize || true"
+                                      [showBorders]="item[1].controlOptions.showBorders || false">
+
+                      </app-pdf-viewer>
+
+                      <arb-box-list *ngSwitchCase="controlType.BOX_LIST" [id]="item[0]"
+                                    [box]="item[1].controlOptions.box"
+                                    [action]="item[1].controlOptions.action" [formControlName]="item[0]"
+                                    [columnCount]="item[1].controlOptions.columnCount"></arb-box-list>
+
+                      <arb-line-card *ngSwitchCase="controlType.LINE_CARD" [id]="item[0]"
+                                     [title]="item[1].controlOptions.title"
+                                     [subTitle]="item[1].controlOptions.subTitle"
+                                     [card]="item[1].controlOptions.card"
+                                     [options]="item[1].controlOptions.options"
+                                     [icon]="item[1].controlOptions.icon"
+                                     [rightIcon]="item[1].controlOptions.rightIcon"
+                                     [badge]="item[1].controlOptions.badge"
+                                     [hasBackground]="item[1].controlOptions.hasBackground"
+                                     [button]="item[1].controlOptions.button"
+                                     [amount]="item[1].controlOptions.amount"
+                                     [currency]="item[1].controlOptions.currency"
+                                     [amountPosition]="item[1].controlOptions.amountPosition"
+                                     [rightTitle]="item[1].controlOptions.rightTitle"
+                                     [rightSubTitle]="item[1].controlOptions.rightSubTitle"
+                                     [pill]="item[1].controlOptions.pill"
+                                     [avatar]="item[1].controlOptions.avatar"
+                                     [divider]="item[1].controlOptions.divider"
+                                     [verticalDivider]="item[1].controlOptions.verticalDivider"
+                                     (onButtonClick)="doButtonClick($event,index)"
+                      ></arb-line-card>
+
+                      <arb-gold-wallet *ngSwitchCase="controlType.GOLD_COMPONENT" [id]="item[0]"
+                                       [title]="item[1].controlOptions.title"
+                                       [balance]="item[1].controlOptions.balance"
+                                       [balanceCurrency]="item[1].controlOptions.balanceCurrency"
+                                       [note]="item[1].controlOptions.note"
+                                       [pill]="item[1].controlOptions.pill"
+                                       [prices]="item[1].controlOptions.prices"
+                                       [duration]="item[1].controlOptions.duration"
+                                       (onFinish)="item[1].onFinish?.emit($event)">
+                        >
+                      </arb-gold-wallet>
+
+                      <arb-datatable *ngSwitchCase="controlType.TABLE" [id]="item[0]" [formControlName]="item[0]"
+                                     [exportFileName]="item[1].controlOptions.exportFileName"
+                                     [title]="item[1].controlOptions.title"
+                                     [showSearch]="item[1].controlOptions.showSearch || false"
+                                     [showFilter]="item[1].controlOptions.showFilter || false"
+                                     [filterIsActive]="item[1].controlOptions.filterIsActive || false"
+                                     [headers]="item[1].controlOptions.headers || []"
+                                     [data]="item[1].controlOptions.data"
+                                     [updateValueEvent]="item[1].updateValueEvent"
+                                     [showSortAndPin]="item[1].controlOptions.showSortAndPin == null? true: item[1].controlOptions.showSortAndPin"
+                                     [hasCheckbox]="item[1].controlOptions.hasCheckbox|| false"
+                                     [columnId]="item[1].controlOptions.columnId"
+                                     [isDisabled]="item[1].controlOptions.isDisabled || false"
+                                     [selectedValues]="item[1].controlOptions.selectedValues||[]"
+                                     [maxDisplayRow]="item[1].controlOptions.maxDisplayRow"
+                                     [ShowMoreText]="item[1].controlOptions.ShowMoreText "
+                                     [ShowLessText]="item[1].controlOptions.ShowLessTex"
+                                     [paginationValue]="item[1].controlOptions.paginationValue || {page: 1, size: 10}"
+                                     [total]="item[1].controlOptions.total"
+                                     [visibleRangeLength]="item[1].controlOptions.visibleRangeLength || 5"
+                                     [pageSizes]="item[1].controlOptions.pageSizes|| [5, 10, 25, 50, 100]"
+                                     (buttonClicked)="item[1].buttonClicked?.emit($event)"
+                                     (externalSort)="item[1].externalSort?.emit($event)"
+                                     (externalPagination)="item[1].externalPagination?.emit($event)"
+                                     (onInputChange)="item[1].onInputChange?.emit($event)"
+                                     (onFilterClick)="item[1].onFilterClick?.emit($event)"
+                                     (onCheckBoxColumnChange)="item[1].onCheckBoxColumnChange?.emit($event)">
+                      </arb-datatable>
+
+                      <arb-radio-group [formControlName]="item[0]" [id]="item[0]"
+                                       [options]="item[1].controlOptions.options"
+                                       [textOnStart]="item[1].controlOptions.textOnStart"
+                                       *ngSwitchCase="controlType.RADIO_GROUP">
+                      </arb-radio-group>
+
+                      <arb-user-card *ngSwitchCase="controlType.USER_CARD" [id]="item[0]"
+                                     [title]="item[1].controlOptions.title" [subTitle]="item[1].controlOptions.subTitle"
+                                     [desc]="item[1].controlOptions.desc" [pillText]="item[1].controlOptions.pillText"
+                                     [pillType]="item[1].controlOptions.pillType"
+                                     [avatarValue]="item[1].controlOptions.avatarValue"
+                                     [avatarType]="item[1].controlOptions.avatarType">
+                      </arb-user-card>
+
+                  <arb-progress *ngSwitchCase="controlType.PROGRESS"
+                                [title]="item[1].controlOptions.title"
+                                [progress]="item[1].controlOptions.progress"
+                                [progressMax]="item[1].controlOptions.progressMax"
+                                [textEnd]="item[1].controlOptions.textEnd"
+                                [textBottomEnd]="item[1].controlOptions.textBottomEnd"
+                                >
+                  </arb-progress>
+                  <arb-tabs *ngSwitchCase="controlType.TABS" [id]="item[0]"
+                            [tabs]="item[1].controlOptions.tabs"
+                            [value]="item[1].value"
+                            (onChange)="doButtonClick($event,index)"></arb-tabs>
+
+
+                      <arb-generic-feature-listing-group *ngSwitchCase="controlType.GENERIC_FEATURE_LIST_GROUP"
+                                                         [id]="item[0]"
+                                                         [list]="item[1].controlOptions.list"
+                                                         [selectedId]="item[1].controlOptions.selectedId"
+                                                         [selectedHint]="item[1].controlOptions.selectedHint"
+                                                         (onButtonClick)="doButtonClick($event,index)">
+                      </arb-generic-feature-listing-group>
+
+                      <div *ngSwitchCase="controlType.EMPTY"></div>
+
+                      <arb-dividers *ngSwitchCase="controlType.DIVIDER"></arb-dividers>
+
+                    </div>
+
+                    <div class="row color-arb-negativeText font-caption-regular px-2 pb-2"
+                         *ngIf="item[1].controlType != controlType.PILL &&
+                                      item[1].controlType != controlType.TITLE &&
+                                      item[1].controlType != controlType.USER_CARD &&
+                                      item[1].controlType != controlType.TABS &&
+                                      item[1].controlType != controlType.DIVIDER">
+
+
+                    <span *ngIf="form.formGroup.controls[item[0]].hasError('customValidator')
+                          && form.formGroup.controls[item[0]].touched">
+                    {{(item[1].validationLabels?.customValidator | translate: item[1].validationLabels?.translateOptions) ||
+                    ''}}
+                  </span>
+                      <span *ngIf="form.formGroup.controls[item[0]].hasError('required')
+                          && form.formGroup.controls[item[0]].touched">
+                    {{(item[1].validationLabels?.required | translate: item[1].validationLabels?.translateOptions) ||
+                      ''}}
+                  </span>
+                      <span *ngIf="form.formGroup.controls[item[0]].hasError('min')
+                && form.formGroup.controls[item[0]].touched">
+                    {{(item[1].validationLabels?.min | translate: item[1].validationLabels?.translateOptions) || ''}}
+                  </span>
+                      <span *ngIf="form.formGroup.controls[item[0]].hasError('max')
+                && form.formGroup.controls[item[0]].touched">
+                    {{(item[1].validationLabels?.max | translate : item[1].validationLabels?.translateOptions) || ''}}
+                  </span>
+                      <span *ngIf="form.formGroup.controls[item[0]].hasError('minlength')
+                && form.formGroup.controls[item[0]].touched">
+                    {{(item[1].validationLabels?.minLength | translate: item[1].validationLabels?.translateOptions) ||
+                      ''}}
+                  </span>
+                      <span *ngIf="form.formGroup.controls[item[0]].hasError('maxlength')
+                && form.formGroup.controls[item[0]].touched">
+                    {{(item[1].validationLabels?.maxLength | translate: item[1].validationLabels?.translateOptions) ||
+                      ''}}
+                  </span>
+                      <span
+                        *ngIf="!form.formGroup.controls[item[0]].valid && form.formGroup.controls[item[0]].touched && !item[1].validationLabels">
+                      {{ item[1]?.label}}  {{ 'public.not-valid' | translate}}
+                </span>
+                      <ng-container *ngIf="form.formGroup.controls[item[0]].hasError('pattern')
+                && form.formGroup.controls[item[0]].touched">
+                        <ng-container *ngIf="item[1].validationLabels?.pattern">
+                    <span *ngFor="let text of getValidationArray(item[1].validationLabels?.pattern)">
+                    {{(text | translate: item[1].validationLabels?.translateOptions) || ''}}
+                  </span>
+                        </ng-container>
+                      </ng-container>
+
+                    </div>
+                  </div>
+
+                </ng-container>
+
+
+              </ng-container>
+
+              <ng-container *ngIf="!isProd">
+                <div class="flex-column">
+                  <ng-container *ngFor="let item of form.sortedControls ">
+                  <span
+                    *ngIf="!form.formGroup.controls[item[0]].valid  && !form.controls[item[0]].hidden && !form.controls[item[0]].disabled"
+                    class="d-flex color-arb-negativeText font-body-regular">
+                     {{ (item[1]?.label | translate).replace('*', '')}}  {{ 'public.not-valid' | translate}}
+                  </span>
+                  </ng-container>
+                </div>
+              </ng-container>
+
+              <div class=" row color-arb-negativeText font-caption-regular px-2 pb-2" *ngIf="form.errors">
+                <ng-container *ngFor="let item of form.errors">
+                  <span> {{ item | translate }} </span>
+                </ng-container>
+              </div>
+
+              <div class="row color-arb-negativeText font-caption-regular px-2 pb-2"
+                   *ngIf="form.formGroup.touched &&form.formGroup.errors">
+                <ng-container *ngFor="let item of form.formValidator">
+              <span *ngIf="form.formGroup.hasError(item.errorName)  "> {{ item.errorMessage | translate : {
+                value:
+                  form.formGroup.getError(item.errorName) ? form.formGroup.getError(item.errorName) : ""
+              } }} </span>
+                </ng-container>
+              </div>
+
+            </div>
+          </div>
+        </form>
+        <arb-dividers *ngIf="form.showDivider"></arb-dividers>
+      </ng-template>
+    </ngb-panel>
+
+  </ng-container>
+</ngb-accordion>
+

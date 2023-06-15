@@ -1,0 +1,8 @@
+<arb-title
+  id="accounts-cheques-title-id"
+  [title]="'accounts.cheques.title' | translate"
+  [endButtons]="pageTitleEndButtons"
+  [showArrow]="true"
+  (onButtonClick)="doButtonClick($event)"
+></arb-title>
+<app-form [page]="chequesLandingPage"></app-form>

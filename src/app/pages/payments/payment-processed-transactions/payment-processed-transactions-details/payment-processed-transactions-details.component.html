@@ -1,0 +1,9 @@
+<arb-summary *ngIf="summary"
+  [title]="summary.title"
+  [sections]="summary.sections"
+  id="summary"
+></arb-summary>
+<arb-bottom-buttons
+  [endButtons]="[delButton]"
+  (onClick)="goToBack()"
+></arb-bottom-buttons>

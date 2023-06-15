@@ -1,0 +1,11 @@
+::ng-deep .footer-fix .modal-footer{
+  display: initial;
+}
+::ng-deep .modalHeader .modal-header{
+  border-bottom: none;
+}
+::ng-deep .button-end{
+  button{
+    text-align: end;
+  }
+}

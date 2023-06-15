@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col">
+    <arb-title
+      [id]="pageTitle.id"
+      [type]="pageTitle.type"
+      [title]="pageTitle.title"
+      [showArrow]="true"
+      [endButtons]="pageTitle.endButtons"
+      (onButtonClick)="onButtonClick($event)"
+    >
+    </arb-title>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <arb-datatable
+      [id]="'processedTrxListID'"
+      (buttonClicked)="onTableButtonClick($event)"
+      [headers]="headers"
+      [data]="UsersListManagement"
+      [exportFileName]="exportFileName"
+      [showSearch]="true"
+      [showFilter]="true"
+      [paginationValue]="{ page: 1, size: 5 }"
+      [hasCheckbox]="false"
+      [pageSizes]="[5, 10, 20, 50, 100]"
+      [columnId]="'userPk'"
+      [title]="sectionTitle.title"
+      (onFilterClick)="openSearch()"
+    >
+    </arb-datatable>
+  </div>
+</div>

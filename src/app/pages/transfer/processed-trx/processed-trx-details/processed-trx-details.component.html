@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col">
+    <arb-title
+      [id]="pageTitle.id"
+      [type]="pageTitle.type"
+      [title]="pageTitle.title"
+      [showArrow]="true"
+      (onButtonClick)="onBackArrowClick($event)"
+    >
+    </arb-title>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <arb-summary [sections]="[section]"></arb-summary>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <arb-datatable
+      [id]="'processedTrxDetailsID'"
+      [headers]="headers"
+      [data]="processedTransactionsDetails"
+      [paginationValue]="{ page: 1, size: 50 }"
+      [hasCheckbox]="false"
+      [total]="total"
+      [exportFileName]="'Authorization Level information'"
+      [columnId]="'transferBatchPk'"
+      [title]="'transfer.processedTrnx.authLvl'"
+    >
+    </arb-datatable>
+  </div>
+</div>

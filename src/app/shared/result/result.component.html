@@ -1,0 +1,20 @@
+<ng-container *ngIf="result">
+  <arb-procedure-status
+    [type]="result.type"
+    [title]="result.title"
+    [subTitle]="result.subTitle"
+    [showSariaLogo]="result.showSariaLogo || false"
+  ></arb-procedure-status>
+  <arb-table-controls
+    *ngIf="result.type == 'Success' && result.summary"
+    [showExportPDF]="true"
+    (onExportClick)="export($event)"
+  ></arb-table-controls>
+  <arb-summary
+    *ngIf="result.summary"
+    [title]="result.summary.title"
+    [sections]="result.summary.sections"
+    id="summary"
+    #summary
+  ></arb-summary>
+</ng-container>

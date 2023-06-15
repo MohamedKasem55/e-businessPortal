@@ -1,0 +1,22 @@
+<arb-title
+  (onButtonClick)="doButtonClick($event)"
+  id="self-on-boarding-title"
+  type="Page"
+  [title]="title | translate"
+  [showArrow]="true"
+  [endButtons]="buttons"
+>
+</arb-title>
+<div class="col-12">
+  <div class="row row-cols-1 row-cols-md-2 p-3">
+    <ng-container *ngFor="let card of lineCards; let i = index">
+      <arb-line-card
+        [id]="'self-on-boarding-cards-' + i"
+        [title]="card.title"
+        [subTitle]="card.subTitle"
+        [card]="card.image"
+      >
+      </arb-line-card>
+    </ng-container>
+  </div>
+</div>

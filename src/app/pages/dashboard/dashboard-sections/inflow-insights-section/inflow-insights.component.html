@@ -1,0 +1,55 @@
+<div class="col-12 mb-5">
+<div class="row ">
+  <arb-title
+    [id]="'charts-title'"
+    [title]="chartPageTitle | translate"
+    [showArrow]="showArrow"
+    (onButtonClick)="onTitleButtonClick($event)"
+    type="Section">
+  </arb-title>
+</div>
+<div class="row" *ngIf="showTryAgain">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <arb-line-card-group id="try-again" [lineCards]="tryAgainBar" (onButtonClick)="onTryAgainClick($event)">
+    </arb-line-card-group>
+  </div>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <arb-line-card-group id="try-again-1" [lineCards]="tryAgainDougnet" (onButtonClick)="onTryAgainClick($event)">
+    </arb-line-card-group>
+  </div>
+</div>
+<div class="row" *ngIf="!showTryAgain">
+  <div [ngClass]="'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 g-2'" >
+    <app-chart
+      [chartData]="inOutflowDoughnutChartData"
+      [chartOptions]="inOutflowDoughnutChartOptions"
+      [showHeader]="true"
+      [showChart]="showInflowChart"
+      [ammoutOptions]="chartAmountOptions">
+    </app-chart>
+  </div>
+  <div [ngClass]="'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 g-2'" >
+    <app-chart
+      [chartData]="inOutflowBarChartData"
+      [chartOptions]="inOutflowBarChartDrillDownOptions"
+      [showHeader]="true"
+      [showChart]="showInflowChart">
+    </app-chart>
+  </div>
+  <div [ngClass]="'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 g-2'"
+       *ngIf="showLocationGraph">
+    <arb-title
+       [id]="'charts-title'"
+       [title]="'public.pos-flow' | translate"
+       type="Section">
+    </arb-title>   
+    <app-chart
+      [chartData]="locationDoughnutChartData"
+      [chartOptions]="inOutflowDoughnutChartOptions"
+      [showHeader]="true"
+      [showChart]="showLocationGraph"
+      [ammoutOptions]="locationChartAmmoutOptions">
+    </app-chart>
+  </div>
+</div>
+</div>

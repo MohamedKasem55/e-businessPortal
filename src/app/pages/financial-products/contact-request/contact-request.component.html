@@ -1,0 +1,13 @@
+<div [ngClass]="isExt ? 'pt-2 px-3' : ''">
+  <app-transaction-follow
+    [pages]="pages"
+    [pageTitle]="pageTitle"
+    [startButtons]="startButtons"
+    [endButtons]="endButtons"
+    [summary]="summary"
+    [result]="result"
+    (onResultChanged)="onResultChanged($event)"
+    (onButtonClick)="onButtonClick($event)"
+  >
+  </app-transaction-follow>
+</div>

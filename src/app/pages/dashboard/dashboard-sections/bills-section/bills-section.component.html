@@ -1,0 +1,22 @@
+<div class="d-flex flex-column h-100 w-100">
+
+  <arb-line-card-group
+    id="top-bills"
+    [title]="topBillsTitle"
+    [canShowNoData]="false"
+    [columnCount]="columnCount"
+    [lineCards]="billsLineCards"
+    (onButtonClick)="onBillClick($event)"
+  >
+  </arb-line-card-group>
+
+  <div class=" flex-grow-1 mb-2">
+    <arb-buttons-list
+      *ngIf="billsLineCards && billsLineCards!.length < 4 "
+      [title]="''"
+      [subTitle]="'dashboard-sections.add-bills'"
+      [buttons]="goToBillsBtn"
+      (onButtonClick)="onGoToBillsClick()">
+    </arb-buttons-list>
+  </div>
+</div>

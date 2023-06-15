@@ -1,0 +1,176 @@
+<div class="text-center">
+  <div
+    class="position-absolute bottom-0 pb-1 mt-3 w-100 arb-footer-xs bg-arb-primaryBG"
+  >
+    <div class="container text-center">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <arb-button
+            id="contactUs"
+            (onClick)="openContactUs(contactUs)"
+            [text]="'pre-login.footer.contact-us' | translate"
+            type="outLine"
+            class="nav-link px-2"
+          ></arb-button>
+        </li>
+        <li class="nav-item">
+          <arb-button
+            id="termsConditions"
+            (onClick)="openTermsAndConditions(termsConditions)"
+            [text]="'pre-login.footer.terms-condtions' | translate"
+            type="outLine"
+            class="nav-link px-2"
+          ></arb-button>
+        </li>
+        <li class="nav-item">
+          <arb-button
+            id="faq"
+            [text]="'pre-login.footer.faq' | translate"
+            (click)="goToLink('AlRajhi_Business_FAQ_V2.4_')"
+            type="outLine"
+            class="nav-link px-2"
+          ></arb-button>
+        </li>
+        <li class="nav-item">
+          <arb-button
+            id="online-security-conditions"
+            (click)="goToLink('Online_Security_Overview-')"
+            [text]="'pre-login.footer.online-security-con' | translate"
+            type="outLine"
+            class="nav-link px-2"
+          >
+          </arb-button>
+        </li>
+        <li class="nav-item">
+          <arb-button
+            id="privacy-policy"
+            [text]="'pre-login.footer.privacy-policy' | translate"
+            (click)="goToLink('Privacy_statement-SME-')"
+            type="outLine"
+            class="nav-link px-2"
+          ></arb-button>
+        </li>
+        <li class="nav-item">
+          <arb-button
+            id="KYC"
+            [text]="'pre-login.footer.kyc' | translate"
+            (click)="openKYC()"
+            type="outLine"
+            class="nav-link px-2"
+          ></arb-button>
+        </li>
+        <li class="nav-item">
+          <arb-button
+            id="Financial"
+            [text]="'pre-login.footer.financial' | translate"
+            (click)="openFinancial()"
+            type="outLine"
+            class="nav-link px-2"
+          ></arb-button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ng-template #contactUs let-modalContactUs>
+  <app-modal-wrapper>
+    <div class="modal-body">
+      <div class="d-flex gap-4 position-relative">
+        <arb-button
+          class="float-end"
+          type="outLine"
+          [id]="'close'"
+          prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+          (onClick)="modalContactUs.dismiss('Cross click')"
+        >
+        </arb-button>
+        <div>
+          <div class="img-width">
+            <arb-logo></arb-logo>
+          </div>
+          <arb-line-card
+            id="toll-free-number"
+            [weight]="'Bold'"
+            [title]="'pre-login.contact-us.toll-free-title' | translate"
+            [subTitle]="'pre-login.contact-us.toll-free-subtitle' | translate"
+            class="contactUsModal"
+          ></arb-line-card>
+          <arb-line-card
+            id="Riyadh"
+            [weight]="'Bold'"
+            [title]="'pre-login.contact-us.riyadh-title' | translate"
+            class="contactUsModal"
+            [subTitle]="'pre-login.contact-us.riyadh-subtitle' | translate"
+          ></arb-line-card>
+          <arb-line-card
+            id="Jeddah"
+            [weight]="'Bold'"
+            [title]="'pre-login.contact-us.jeddah-title' | translate"
+            class="contactUsModal"
+            [subTitle]="'pre-login.contact-us.jeddah-subtitle' | translate"
+          ></arb-line-card>
+          <arb-line-card
+            id="Dammam"
+            [weight]="'Bold'"
+            [title]="'pre-login.contact-us.dammam-title' | translate"
+            class="contactUsModal"
+            [subTitle]="'pre-login.contact-us.dammam-subtitle' | translate"
+          ></arb-line-card>
+        </div>
+        <div>
+          <arb-alert
+            *ngIf="alert"
+            [id]="alert.id"
+            [title]="alert.title || ''"
+            [type]="alert.type"
+            [message]="alert.message"
+            [showClose]="alert.showClose"
+            (onClose)="alertClose()"
+          ></arb-alert>
+          <arb-title
+            id="modalContactUs-title"
+            [title]="'login.contact-info' | translate"
+            [type]="'Page'"
+          ></arb-title>
+          <app-form
+            [forms]="contactUsForm"
+            (onResultChanged)="onResultChange($event)"
+            (onButtonClick)="sendMessage(modalContactUs)"
+          ></app-form>
+        </div>
+      </div>
+    </div>
+  </app-modal-wrapper>
+</ng-template>
+<ng-template #termsConditions let-modalTermsConditions>
+  <app-modal-wrapper>
+    <div class="modal-header d-flex">
+      <h2
+        class="color-arb-primaryText font-h2-bold flex-grow-1 text-start"
+        id="modalTermsConditions-title"
+      >
+        {{ "termsConditions.header" | translate }}
+      </h2>
+      <arb-button
+        class="float-end"
+        type="outLine"
+        [id]="'close'"
+        prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+        (onClick)="modalTermsConditions.dismiss('Cross click')"
+      >
+      </arb-button>
+    </div>
+    <div class="modal-body">
+      <div [innerHTML]="'termsConditions.longText1' | translate"></div>
+      <div [innerHTML]="'termsConditions.longText2' | translate"></div>
+      <div [innerHTML]="'termsConditions.longText3' | translate"></div>
+      <div [innerHTML]="'termsConditions.longText4' | translate"></div>
+    </div>
+    <div>
+      <arb-bottom-buttons
+        [startButtons]="start"
+        (onClick)="close()"
+      ></arb-bottom-buttons>
+    </div>
+  </app-modal-wrapper>
+</ng-template>

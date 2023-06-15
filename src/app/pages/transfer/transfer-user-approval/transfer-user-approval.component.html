@@ -1,0 +1,31 @@
+<arb-title
+  type="Page"
+  id="userApprovalTitle"
+  [showArrow]="true"
+  [title]="'transfer.userApproval.title' | translate"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+<arb-tabs
+  id="userApprovalTabs"
+  [tabs]="tabs"
+  [value]="type"
+  (onChange)="tabChanged($event)"
+></arb-tabs>
+
+<ng-container>
+  <arb-datatable
+    id="user-approval-table"
+    [columnId]="'batchPk'"
+    [showSearch]="true"
+    [headers]="headers"
+    [data]="data"
+    [paginationValue]="paginationValue"
+    [total]="total"
+    [visibleRangeLength]="5"
+    [pageSizes]="[10, 20, 50, 100]"
+    [exportFileName]="exportFileName"
+    [title]="tableTitle"
+    (externalPagination)="externalPagination($event)"
+  >
+  </arb-datatable>
+</ng-container>

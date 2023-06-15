@@ -1,0 +1,24 @@
+
+<div class="row">
+      <app-form
+        
+        [page]="page"
+        (onResultChanged)="doResultChanged($event)"
+        (onButtonClick)="doButtonClick($event)"
+      ></app-form>
+  </div>
+
+<arb-datatable
+  id="credit-transactions"
+  [showSearch]="true"
+  [title]="'cards.statement.title'"
+  [exportFileName]="'cards.statement.title'"
+  [headers]="statementsHeaders"
+  [data]="statementsTableModel"
+  [paginationValue]="{ page: pageNumber, size: rows }"
+  [total]="statementsTableModel.length"
+  [hasCheckbox]="false"
+  [maxDisplayRow]="20"
+  [columnId]="'number'"
+>
+</arb-datatable>

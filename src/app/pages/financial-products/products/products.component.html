@@ -1,0 +1,30 @@
+<div [ngClass]="isExt ? ' px-3 pt-3' : ''">
+  <arb-title
+    type="Page"
+    id="ourProductsTitle"
+    [showArrow]="true"
+    [title]="'financial-products.ourProducts' | translate"
+    (onButtonClick)="onTitleButtonClick($event)"
+  ></arb-title>
+  <div class="pb-3">
+    <arb-tabs
+      id="productsTabs"
+      [tabs]="tabs"
+      [value]="type"
+      (onChange)="tabChanged($event)"
+    ></arb-tabs>
+  </div>
+  <arb-generic-feature-listing-group
+    [id]="'productsDetails'"
+    (onButtonClick)="onButtonClick($event)"
+    [list]="
+      type === 'accounts'
+        ? accounts
+        : type === 'cash'
+        ? cash
+        : type === 'cards'
+        ? cards
+        : business
+    "
+  ></arb-generic-feature-listing-group>
+</div>

@@ -1,0 +1,29 @@
+<ng-container *ngIf="hasAccess">
+<div class="row">
+  <app-result [result]="result"></app-result>
+</div>
+<app-transaction-follow
+  *ngIf="showForm"
+  [pages]="pages"
+  [pageTitle]="pageTitle"
+  [alert]="alert"
+  [startButtons]="startButtons"
+  [endButtons]="endButtons"
+  [summary]="summary"
+  [result]="result"
+  (onResultChanged)="onResultChanged($event)"
+  (onButtonClick)="onButtonClick($event)"
+  (onAlertAction)="onAlertAction($event)"
+>
+</app-transaction-follow>
+<app-self-on-boarding-landing
+  *ngIf="startOnBoarding && !showForm"
+  (onButtonClick)="register($event)"
+  [title]="landingTitle"
+  [lineCards]="lineCards"
+></app-self-on-boarding-landing>
+</ng-container>
+
+<div *ngIf="!hasAccess">
+  <app-result [result]="result"></app-result>
+</div>

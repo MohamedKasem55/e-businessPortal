@@ -1,0 +1,40 @@
+<div class="row">
+  <app-form
+    [form]="form"
+    (onButtonClick)="onClick($event)"
+    (onResultChanged)="getFormValidity($event)"
+  ></app-form>
+</div>
+<ng-template #termsConditions let-modalTermsConditions>
+  <app-modal-wrapper>
+    <div class="modal-header d-flex">
+      <h4
+        class="color-arb-primaryText font-h2-bold flex-grow-1 text-start"
+        id="modalTermsConditions-title"
+      >
+        {{ "termsConditions.name" | translate }}
+      </h4>
+      <arb-button
+        class="float-end"
+        type="outLine"
+        [id]="'close'"
+        prefixIcon="arb-icon-xLarge closeBtn  color-arb-secondaryText m-auto"
+        (onClick)="modalTermsConditions.close()"
+      >
+      </arb-button>
+    </div>
+    <div class="modal-body">
+      <div class="font-body-regular color-arb-primaryText" [innerHTML]="'termsConditions.longText1' | translate"></div>
+      <div class="font-body-regular color-arb-primaryText" [innerHTML]="'termsConditions.longText2' | translate"></div>
+      <div class="font-body-regular color-arb-primaryText" [innerHTML]="'termsConditions.longText3' | translate"></div>
+      <div class="font-body-regular color-arb-primaryText" [innerHTML]="'termsConditions.longText4' | translate"></div>
+    </div>
+    <div class="modal-footer">
+      <arb-bottom-buttons
+        [startButtons]="start"
+        [endButtons]="end"
+        (onClick)="clickBtn($event)"
+      ></arb-bottom-buttons>
+    </div>
+  </app-modal-wrapper>
+</ng-template>

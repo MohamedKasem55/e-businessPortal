@@ -1,0 +1,41 @@
+<arb-alert
+  *ngIf="alert"
+  [id]="alert.id"
+  [title]="alert.title || ''"
+  [type]="alert.type"
+  [message]="alert.message"
+  [showClose]="alert.showClose"
+  (onClose)="alertClose()"
+></arb-alert>
+
+<arb-title
+  id="card-details-title"
+  [showArrow]="true"
+  (onButtonClick)="onBackClick($event)"
+  [title]="'cards.card-info' | translate"
+>
+</arb-title>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+    <arb-card-presentation
+      [id]="'displayed-card-list'"
+      [hideLeftArrow]="!debitCardsList || debitCardsList.length <= 1"
+      [hideRightArrow]="!debitCardsList || debitCardsList.length <= 1"
+      [currentCardIndex]="selectedIndex"
+      [cardInfo]="cardInfo"
+      [size]="userCardsSize"
+      (onCurrentCardIndexChange)="onCurrentCardIndexChange($event)"
+      (onButtonClick)="onCardLabelClick($event)"
+    >
+    </arb-card-presentation>
+  </div>
+  <div class="col-12 col-sm-12 col-md-8 col-lg-4 col-xl-4">
+    <arb-buttons-list
+      [title]="isActiveCard ? 'Card Options' : ''"
+      [subTitle]="isActiveCard ? '' : 'Activate the card to start using it.'"
+      [buttons]="isActiveCard ? cardActionsBtns : []"
+      (onButtonClick)="onCardActionBtnClick($event)"
+    >
+    </arb-buttons-list>
+  </div>
+</div>

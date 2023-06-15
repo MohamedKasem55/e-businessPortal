@@ -1,0 +1,31 @@
+<div class="col-12">
+  <arb-title
+    id="businessHubTitle"
+    [showArrow]="true"
+    (onButtonClick)="onBackArrowClicked()"
+    [title]="'businessHub.businessHubTitle' | translate"
+  ></arb-title>
+  <arb-box-list
+    id="businessHubBoxes"
+    action="onHover"
+    [columnCount]="4"
+    [box]="boxes"
+    (onClick)="onBoxSelected($event)"
+  ></arb-box-list>
+</div>
+<arb-dividers></arb-dividers>
+<div class="col-12">
+  <arb-title
+    id="myPoducts"
+    [title]="'businessHub.myProducts' | translate"
+    [type]="'Section'"
+  ></arb-title>
+    <div>
+      <arb-generic-feature-listing-group
+        [id]="'featuresList'"
+        [title]="'myProducts' | translate"
+        [list]="productsListToShow"
+        (onButtonClick)="onFeatureClicked($event)"
+      ></arb-generic-feature-listing-group>
+    </div>
+</div>

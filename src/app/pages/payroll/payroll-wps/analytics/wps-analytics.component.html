@@ -1,0 +1,51 @@
+<!--<arb-title id="WpsAnalyticsTitleId"-->
+<!--           [title]="'payroll.payroll-wps.analytics.page-name'"-->
+<!--           [endButtons]="pageTitleButtons"-->
+<!--           (onButtonClick)="onTitleButtonsClick($event)"-->
+<!--&gt;</arb-title>-->
+<!--<app-form [forms]="dateFromToForm"></app-form>-->
+<app-transaction-follow
+  [pages]="pages"
+  [pageTitle]="pageTitle"
+  [startButtons]="startButtons"
+  [endButtons]="endButtons"
+  [summary]="summary"
+  [result]="result"
+  (onButtonClick)="onButtonClick($event)"
+  (onResultChanged)="onResultChanged($event)"
+>
+</app-transaction-follow>
+
+<div class="row" *ngIf="showTryAgain">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pb-2">
+    <arb-line-card-group id="try-again" [lineCards]="tryAgainBar" (onButtonClick)="onTryAgainClick($event)">
+    </arb-line-card-group>
+  </div>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pb-2">
+    <arb-line-card-group id="try-again-1" [lineCards]="tryAgainDougnet" (onButtonClick)="onTryAgainClick($event)">
+    </arb-line-card-group>
+  </div>
+</div>
+
+<div class="row" *ngIf="!showTryAgain">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
+    <span class="font-h4-bold color-arb-primaryText ng-star-inserted">  {{'wps-analytics.amount'|translate}}</span>
+    <app-chart
+      [chartData]="amountBarChartData"
+      [chartOptions]="AmountChartOptions"
+      [showChart]="showCarts"
+      [showHeader]="true"
+    >
+    </app-chart>
+  </div>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
+    <span class="font-h4-bold color-arb-primaryText ng-star-inserted"> {{'wps-analytics.count'|translate}}</span>
+    <app-chart
+      [chartData]="countBarChartData"
+      [chartOptions]="countChartOptions"
+      [showChart]="showCarts"
+      [showHeader]="true"
+    >
+    </app-chart>
+  </div>
+</div>

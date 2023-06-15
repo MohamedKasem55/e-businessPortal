@@ -1,0 +1,77 @@
+<section class="arb-login d-flex py-5">
+  <div class="container">
+    <div class="col-12">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8 m-auto">
+          <div class="p-12">
+            <ng-container *ngIf="showStatusScreen">
+              <arb-procedure-status
+                [title]="'Your logged successfully.'"
+                [subTitle]="
+                  'Your request has been sent and we will notify you for any changes as soon as possible.'
+                "
+              ></arb-procedure-status>
+            </ng-container>
+            <ng-container *ngIf="!showStatusScreen">
+              <arb-title
+                id="register-title"
+                [title]="'Account Registration'"
+                type="Chipped"
+              ></arb-title>
+              <br />
+              <arb-steps
+                [steps]="stepper.steps"
+                [stepText]="stepper.stepText"
+                [stepCounter]="stepper.stepCounter"
+                [ofText]="stepper.ofText"
+              ></arb-steps>
+              <br />
+
+              <app-form
+                *ngIf="stepper?.stepCounter === 1"
+                [forms]="firstStepForm"
+              ></app-form>
+
+              <app-form
+                *ngIf="stepper?.stepCounter === 2 && type === 'MADA'"
+                [forms]="secondStepForm"
+              ></app-form>
+
+              <ng-template #redirectionModal let-modal>
+                <app-modal-wrapper>
+                  <div class="modal-body">
+                    <img src="assets/img/warning.svg" />
+                    <arb-title
+                      id="absher-redirection-modal"
+                      [title]="
+                        'You are one step away form registering your account'
+                      "
+                      [type]="'Section'"
+                    ></arb-title>
+                    <br />
+                    <p>You request to Authenticate with Absher</p>
+
+                    <app-form
+                      [forms]="buttonsAbsherVerifyForm"
+                      (onButtonClick)="ClickButtonsAbsher($event)"
+                    ></app-form>
+                  </div>
+                </app-modal-wrapper>
+              </ng-template>
+              <app-form
+                *ngIf="stepper?.stepCounter === 3"
+                [forms]="thirdStepForm"
+              ></app-form>
+
+              <arb-bottom-buttons
+                [startButtons]="startButtons"
+                [endButtons]="endButtons"
+                (onClick)="click($event)"
+              ></arb-bottom-buttons>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+<arb-title
+  type="Page"
+  id="userApprovalTitle"
+  [showArrow]="true"
+  [title]="'payments.userApproval.title' | translate"
+  (onButtonClick)="onTitleButtonClick($event)"
+></arb-title>
+<arb-tabs
+  id="userApprovalTabs"
+  [tabs]="tabs"
+  [value]="type"
+  (onChange)="tabChanged($event)"
+></arb-tabs>
+<arb-datatable
+  id="user-approval-table"
+  [showSearch]="false"
+  [headers]="headers"
+  [data]="data"
+  [columnId]="'batchPk'"
+  [paginationValue]="{ page: 1, size: 50 }"
+  [total]="total"
+  [visibleRangeLength]="5"
+  (buttonClicked)="goToReject($event)"
+  [pageSizes]="[10, 20, 50, 100]"
+  (externalPagination)="externalPagination($event)"
+  [exportFileName]="exportFileName"
+  [title]="'payments.userApproval.title'"
+>
+</arb-datatable>

@@ -1,0 +1,29 @@
+<div class="col-12">
+  <arb-title
+    id="'terminalsTitle'"
+    [title]="title.title"
+    [subTitle]="title.subTitle"
+    (onButtonClick)="onButtonClick($event)"
+    [showArrow]="title.showArrow"
+  >
+  </arb-title>
+  <div class="col-2 pb-2">
+    <arb-table-controls
+      *ngIf="terminalsList?.length"
+      [id]="'pos-maintenance'"
+      [showSearch]="true"
+      (onSearchDataChanged)="onSearchDataChanged($event)"
+    >
+  </arb-table-controls>
+  </div>
+  <div class="row">
+    <div class="col-12 pb-3">
+      <arb-line-card-group
+        [id]="'pos'"
+        [lineCards]="filteredTerminals"
+        [columnCount]="3"
+        (onButtonClick)="onSelected($event)"
+      ></arb-line-card-group>
+    </div>
+  </div>
+</div>

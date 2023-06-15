@@ -1,0 +1,76 @@
+<arb-alert
+  *ngIf="alert"
+  [id]="alert.id"
+  [title]="alert.title || ''"
+  [type]="alert.type"
+  [message]="alert.message"
+  [showClose]="alert.showClose"
+  [action]="alert.action"
+  (onAction)="onAlertAction.emit(alert.id)"
+  (onClose)="alertClose()"
+></arb-alert>
+
+<div class="col-12">
+  <div class="row">
+    <arb-title
+      *ngIf="getPageTitleSteps()"
+      [id]="pageTitle.id"
+      [type]="pageTitle.type || 'Page'"
+      [title]="pageTitle.title"
+      [showArrow]="pageTitle.showArrow"
+      [subTitle]="pageTitle.subTitle"
+      [amount]="pageTitle.amount"
+      [currency]="pageTitle.currency"
+      [startButtons]="pageTitle.startButtons"
+      [endButtons]="pageTitle.endButtons"
+      [chips]="pageTitle.chips"
+      [stepper]="pageTitle.stepper"
+      (onButtonClick)="doButtonClick({ buttonId: $event })"
+    >
+    </arb-title>
+  </div>
+
+  <div class="row">
+    <ng-container *ngFor="let page of pages">
+      <app-form
+        *ngIf="
+          pageTitle.stepper
+            ? page.order == pageTitle.stepper?.stepCounter
+            : true
+        "
+        [page]="page"
+        (onResultChanged)="doResultChanged($event)"
+        (onButtonClick)="doButtonClick($event)"
+      ></app-form>
+    </ng-container>
+  </div>
+
+  <div class="row" *ngIf="pageTitle.stepper">
+    <arb-summary
+      (onButtonClick)="doSummaryButtonClick($event)"
+      *ngIf="
+        pageTitle.stepper?.stepCounter == pageTitle.stepper?.steps?.length! - 1
+      "
+      [title]="summary?.title || undefined"
+      [sections]="summary?.sections || undefined"
+    ></arb-summary>
+  </div>
+
+  <div class="row" *ngIf="pageTitle.stepper">
+    <app-result
+      [result]="result"
+      *ngIf="
+        pageTitle.stepper?.stepCounter == pageTitle?.stepper?.steps?.length
+      "
+    ></app-result>
+  </div>
+
+  <div class="row">
+    <arb-bottom-buttons
+      class=""
+      [startButtons]="startButtons"
+      [endButtons]="endButtons"
+      (onClick)="doButtonClick({ buttonId: $event })"
+    ></arb-bottom-buttons>
+  </div>
+</div>

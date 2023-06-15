@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col">
+    <arb-title
+      (onButtonClick)="onButtonClick($event)"
+      [endButtons]="pageTitle.endButtons"
+      [id]="pageTitle.id"
+      [showArrow]="true"
+      [title]="pageTitle.title"
+      [type]="pageTitle.type">
+    </arb-title>
+  </div>
+</div>
+
+<div class="col-12 m-auto mb-5">
+  <div class="row">
+    <div class="col-12">
+      <arb-tabs (onChange)="tabChanged($event)" [tabs]="tabs" [value]="currentActiveTab" id="cards-tabs"></arb-tabs>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="currentActiveTab === '1'" class="col-12">
+  <div *ngFor="let finaceDataItem of financeData">
+    <app-current-finance [data]="finaceDataItem"></app-current-finance>
+  </div>
+</div>
+
+<div *ngIf="currentActiveTab === '2'" class="col-12">
+  <app-requested-finance></app-requested-finance>
+</div>
+

@@ -1,0 +1,72 @@
+import {Account} from "../../../common/account";
+
+export interface SalaryPaymentInitRes {
+  juridicalState: string;
+  accountList: Account[];
+  salaryPaymentDetails: SalaryPaymentDetails;
+}
+
+export interface SalaryPaymentDetails {
+  molId: string;
+  numEmployees: number;
+  numRajhiTransfers: number;
+  numNonRajhiTransfers: number;
+  totalAmount: number;
+  totalNumNonRajhi: number;
+  totalNumRajhi: number;
+  totalFeesRajhi: number;
+  totalFeesNonRajhi: number;
+  totalEstimated: number;
+  batchName: string;
+  paymentDate: Date;
+  initiationDate: Date;
+  approvedDate: Date;
+  batchStatus: string;
+  remarks: string;
+  paymentPurpose: string;
+  totalCancellationCharges: number;
+  customerReference: string;
+  fileReference: string;
+  companyName: string;
+  tabadulCompanyCode: string;
+  payrollDebitAccount: string;
+  currencyDebitAccount: string;
+  payrollPrivilege: string;
+  monthlyFee: number;
+  localBankFee: number;
+  fileFee: number;
+  penaltyFee: number;
+  profileNumber: string;
+  activeFlag: string;
+  userFolder: string;
+  requestType: string;
+  updateOnlyAmounts: boolean;
+  errorMessageKey: string;
+  feedbackType: string;
+  molEstbid: string;
+  layout: string;
+  payrollChargeAccount: string;
+  transactionFee: number;
+  transactionFailFee: number;
+  transactionCanFee: number;
+  transactionFeeLocal: number;
+  transactionFailFeeLocal: number;
+  transactionCanFeeLocal: number;
+  postingFlag: string;
+  debitPreference: string;
+  fileAuth: string;
+  reject: string;
+  confirmation: string;
+  combined: string;
+  generationDate: number;
+  initial: string;
+  rejected: string;
+  combinedSum: string;
+  companyCat: string;
+  registered: boolean;
+  vatMonthlyFee: number;
+  vatTransactionFee: number;
+  vatTransactionFeeLocal: number;
+  vatFileFee: number;
+  vatPenaltyFee: number;
+}

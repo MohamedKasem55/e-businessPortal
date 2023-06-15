@@ -1,0 +1,32 @@
+export interface Account {
+  erNumber?: string;
+  modified?: boolean;
+  accountPk: number;
+  alias: string;
+  companyPk: number;
+  branchid: string;
+  branchName?: string;
+  typeAccount: string;
+  code000: string;
+  currency: string;
+  checkDigit: string;
+  numberAccount: string;
+  availableBalance: number;
+  ledgerBalance: number;
+  status: string;
+  exchangeRate?: number;
+  availableSarBalance?: number;
+  ibanNumber: string;
+  txAccountString?: string;
+  unclearedBalance?: number;
+  ccdmAlias: string;
+  accountLevels?: boolean[];
+  inquiry: boolean;
+  dashboard: boolean;
+  payment: boolean;
+  typeFunction?: string;
+  logoType?: string;
+  accountLogoUrl?: string;
+  fullAccountNumber: string;
+  account18Length: string;
+}

@@ -1,0 +1,32 @@
+<ng-container *ngIf="eligibleFlg === undefined || eligibleFlg === true">
+  <arb-title
+    [showArrow]="true"
+    [title]="'New Finance Request'"
+    id="newFinanceTitle"
+    type="Page"
+  ></arb-title>
+  <arb-title
+    [id]="'2'"
+    title="Explore our Financing Products"
+    type="Chipped"
+  ></arb-title>
+
+  <div class="row py-3">
+    <arb-line-card
+      [id]="'2'"
+      title="finance.fleet.requests.completeApplicationNote"
+      icon=" arb-icon-exclamationBorder"
+      weight="Bold"
+    ></arb-line-card>
+  </div>
+
+  <arb-box-list
+    (onClick)="selectProduct($event)"
+    [box]="products"
+    [columnCount]="4"
+    action="onHover"
+    id="finance-products"
+  ></arb-box-list>
+</ng-container>
+
+
